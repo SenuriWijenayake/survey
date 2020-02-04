@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Online Quiz</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+  <script type="text/javascript" src="./js/app.js"></script>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="./css/styles.css">
+</head>
+
+<body>
+  <div ng-app="app" ng-controller="QuizController">
+    <div class="row">
+      <div class="col-sm-6" id="question-area" style="display:none;">
+        <form class="form-styles">
+          <div id="qBox" style="text-align: center; padding:15px;">
+            <div class="row">
+              <p class="question-text"> <span ng-if="question.questionNumber >= 0"> Q{{currentQIndex - 1}}. </span>{{question.questionText}}</p>
+              <div id="image-container" style="margin-bottom: 15px;">
+                <img ng-if='question.img' src="{{question.img}}" style="width:220px; height:125px;">
+              </div>
+            </div>
+
+            <div class="row" ng-repeat="answer in question.answers">
+              <div class="col-sm-4">
+                <input id="{{answer.id}}" type="radio" value="{{answer.id}}" name="answerOptions" ng-model="myAnswer.answerId" class="answer-radio-button" ng-click="clicked()" required />
+              </div>
+              <div class="col-sm-8 answer-label" class="answer-label">
+                <label for="{{answer.id}}" class="radio-text">{{answer.answer}}</label>
+              </div>
+            </div>
+            <div id="confidence-container">
+              <div>
+                <p class="confidence-text">How confident are you of the selected answer?
+                  <br>Move the slider to denote a value.</p>
+              </div>
+
+              <div class="slidecontainer" style="width:510px;">
+                <input type="range" ng-model="myAnswer.confidence" min="0" max="100" value="50" step="1" id="rangeInput" oninput="output.value = rangeInput.value" class="slider">
+              </div>
+              <div class="outputcontainer">
+                <output id="output" for="rangeInput">Not Selected</output>
+              </div>
+            </div>
+            <br />
+
+            <div class="button">
+              <input id="submit-button" style="display:none;" class="submit-button" type="submit" ng-click="(count == 0) ? submitAnswer() : update()" />
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="col-sm-6 chartdiv" id="chart-area">
+        <div id="chart_div" style="display:none;margin-left: 3%;margin-top:3%;">
+          <div style="font-weight:bold;margin-bottom:1%;">See how others have answered this question...</div>
+          <div class="row option-row" ng-repeat="option in controlFeedback">
+            <div class="col-sm-3 option-box">{{option.answer}}</div>
+            <div class="col-sm-9" style="padding-left:10px;padding-right:0px;">
+              <img ng-repeat="block in option.value" src="./assets/{{block.src}}" class="control-box" ng-class="{'cbox': '{{block.src}}' == 'dash.png'}" />
+            </div>
+          </div>
+        </div>
+        <div id="loader" style="display: none;" class="loader"></div>
+        <div id="loader-text" style="display: none;" class="loader-text">Loading results.. Please wait.</div>
+      </div>
+
+      <div class="col-sm-6 avatardiv" id="avatar-area">
+        <div id="avatar_div" style="display:none;margin-left: 3%;margin-top:3%;">
+          <div style="font-weight:bold;margin-bottom:1%;">See how others have answered this question...</div>
+          <div class="row option-row" ng-repeat="option in feedback">
+            <div class="col-sm-3 option-box">{{option.answer}}</div>
+            <div class="col-sm-9" style="padding-left:5px;padding-right:0px;">
+              <img ng-repeat="avatar in option.value" src="./assets/{{avatar.src}}" class="avatar-box" />
+            </div>
+          </div>
+        </div>
+        <div id="loader" style="display: none;" class="loader"></div>
+        <div id="loader-text" style="display: none;" class="loader-text">Loading results.. Please wait.</div>
+      </div>
+
+      <div class="col-sm-6 namesdiv" id="names-area">
+        <div id="names_div" style="display:none;margin-left: 3%;margin-top:3%;">
+          <div style="font-weight:bold;margin-bottom:1%;">See how others have answered this question...</div>
+          <div class="row option-row" ng-repeat="option in feedback">
+            <div class="col-sm-3 option-box">{{option.answer}}</div>
+            <div class="col-sm-9 name-row">
+              <label ng-repeat="name in option.value" class="name-box">{{name.src}}</label>
+              <!-- <img ng-repeat="name in option.value" src="./assets/name-tags/{{name.src}}" class="name-box" /> -->
+            </div>
+          </div>
+        </div>
+        <div id="loader" style="display: none;" class="loader"></div>
+        <div id="loader-text" style="display: none;" class="loader-text">Loading results.. Please wait.</div>
+      </div>
+
+      <div class="row">
+        <div id="change-section" class="col-sm-6" style="margin-bottom:50px;display:none;float:left;margin-left:25px;padding:20px;">
+          <div id="descr">
+            <p class="change-text">Would you like to make any changes?</p>
+          </div>
+          <div class="col-sm-6">
+            <input type="button" value="Yes" class="yes-button" ng-click="yes()" />
+          </div>
+          <div class="col-sm-6">
+            <input type="button" value="No, next question" class="no-button" ng-click="next()" />
+          </div>
+        </div>
+        <div class="col-sm-6"></div>
+      </div>
+      <div class="chatarea col-sm-6" id="chat-area">
+        <div class="minimize">
+          <!-- <img onclick="alert()" src="../assets/minimize.png" width="25" height="21" style="float:right;border-left: grey solid 1px;"> -->
+        </div>
+        <div class="textarea" id="text-area">
+          <div ng-repeat="line in history" ng-class="{'last-line':$last}">
+            <b ng-if='line.name'> {{line.name}} : </b> {{line.msg}}
+          </div>
+        </div>
+        <div class="inputarea">
+          <input type="text" ng-model="message" id="chat-text" placeholder="Type your message here.." class="text-box">
+          <button id="sendButton" ng-click="sendMessage()" style="width: 13%;">Send</button>
+        </div>
+      </div>
+    </div>
+</body>
+
+</html>
