@@ -1,6 +1,6 @@
 var app = angular.module('app', []);
-var api = 'https://stark-sands-60128.herokuapp.com';
-//var api = 'http://localhost:5000';
+// var api = 'https://stark-sands-60128.herokuapp.com';
+var api = 'http://localhost:5000';
 
 app.controller('BigFiveController', function($scope, $http, $window) {
   $http({
@@ -17,38 +17,75 @@ app.controller('BigFiveController', function($scope, $http, $window) {
 
 app.controller('HomeController', function($scope, $http, $window) {
   $scope.user = {};
+  $scope.user.questionSet = "1"; // This will be hardcoded based on the question set
 
-  $('#gender-specified').change(function() {
-    if (this.checked) {
+  $('.gender-radio-button').change(function() {
+    if (this.id == "gender-specified"){
+      $('#gender-text').prop('disabled', false);
       $('#gender-text').prop('required', true);
     } else {
       $('#gender-text').prop('required', false);
+      $('#gender-text').val("");
+      $('#gender-text').prop('disabled', true);
     }
   });
 
-  $scope.submitDetails = function(user) {
-    if (user.mode && user.questionSet && user.gender && user.age && user.education && user.field && (user.gender == 'specified' ? user.genderSpecified : true) && (user.mode == 'name' ? user.name : true)) {
-
-      $("#index-submit-button").attr('disabled', true);
-      $("#index-loader").css("display", "block");
-
-      $http({
-        method: 'POST',
-        url: api + '/user',
-        data: user,
-        type: JSON,
-      }).then(function(response) {
-        $window.sessionStorage.setItem('userId', response.data.id);
-        $window.sessionStorage.setItem('mode', user.mode);
-        $window.sessionStorage.setItem('questionSet', user.questionSet);
-        $window.sessionStorage.setItem('order', JSON.stringify(response.data.order));
-        $window.location.href = './quiz.html';
-      }, function(error) {
-        console.log("Error occured when submitting user details");
-      });
+  $('.edu-radio-button').change(function() {
+    if (this.id == "education-specified"){
+      $('#education-text').prop('disabled', false);
+      $('#education-text').prop('required', true);
+    } else {
+      $('#education-text').prop('required', false);
+      $('#education-text').val("");
+      $('#education-text').prop('disabled', true);
     }
+  });
 
+  $scope.indexNext = function(user) {
+    if (user.gender && user.age && user.age >=18 && user.education && user.socialmedia && (user.gender == "gender-specified" ? user.genderSpecified : true) && (user.education == "education-specified" ? user.educationSpecified : true)) {
+      $("#index-next").attr('disabled', true);
+
+      $(".input-text").attr('disabled', true);
+      $(".specify-text").attr('disabled', true);
+      $(".edu-specify-text").attr('disabled', true);
+
+      $(".radio-button").attr('disabled', true);
+      $(".gender-radio-button").attr('disabled', true);
+      $(".edu-radio-button").attr('disabled', true);
+
+      $("#index-next").css('background-color', 'grey');
+      $("#index-instructions").css("display", "block");
+    }
   };
+
+  $scope.submitDetails = function(user) {
+    $("#index-submit-button").attr('disabled', true);
+
+    //Set up the user object
+    if (user.gender != "gender-specified"){
+      delete user.genderSpecified;
+    }
+    if (user.education != "education-specified"){
+      delete user.educationSpecified;
+    }
+    console.log(user);
+
+    $http({
+      method: 'POST',
+      url: api + '/user',
+      data: user,
+      type: JSON,
+    }).then(function(response) {
+      $window.sessionStorage.setItem('userId', response.data.id);
+      $window.sessionStorage.setItem('questionSet', user.questionSet);
+      $window.sessionStorage.setItem('order', JSON.stringify(response.data.order));
+      $window.location.href = './quiz.html';
+    }, function(error) {
+      console.log("Error occured when submitting user details");
+    });
+
+};
+
 });
 
 app.controller('QuizController', function($scope, $http, $window, $timeout) {
