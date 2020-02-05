@@ -19,9 +19,124 @@
 
 <body>
   <div ng-app="app" ng-controller="QuizController">
+
+    <!-- warning message-->
     <div class="row">
-      <div class="col-sm-6" id="question-area" style="display:none;">
+      <div class="col-sm-12">
+        <label class="col-sm-12 quiz-warning">Do NOT refresh, go back/forward using browser controls during the survey.</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- step 1 -->
+      <div class="col-sm-5 image-area">
+        <div><label class="col-sm-12 step-label">Step 1</label></div>
+        <div class="screenshot-area">
+          <img src={{question.one}} class="screenshot-class"/>
+        </div>
+      </div>
+
+      <!-- step 2 -->
+      <div class="col-sm-5 image-area-two">
+        <div><label class="col-sm-12 step-label">Step 2</label></div>
+        <div class="screenshot-area">
+          <img src={{question.two}} class="screenshot-class"/>
+        </div>
+      </div>
+
+      <div class="col-sm-7 question-area">
+        <div><label class="col-sm-12 question-labels" style="margin-top: 42px;">Assume that this post appears on your Facebook news feed as shared by one of your distant friends.</label></div>
+        <!--Ask for confidence-->
+        <div class="col-sm-12 question-confidence">
+            <div>
+              <p class="question-labels">1) How familiar are you on the topic discussed in this post? Move the slider to denote a value. Higher values denote higher familiarity.</p>
+            </div>
+            <div class="slidecontainer" style="width:510px;">
+              <input type="range" ng-model="myAnswer.initialConfidence" min="0" max="100" value="50" step="1" id="rangeInput" oninput="output.value = rangeInput.value" class="slider">
+            </div>
+            <div class="outputcontainer">
+              <output id="output" for="rangeInput">Not Selected</output>
+            </div>
+        </div>
+
+        <div class="col-sm-12 question-radio-opinion" style="margin-top: 25px;display:none;">
+          <label class="question-labels">2) Is your opinion on this post is supportive or critical?</label>
+          <div class="opinion-radio">
+            <div class="row">
+              <input style="margin-left: 40px;" id="initialSupportive" type="radio" name="myAnswer.initialRadioOpinion" ng-model="myAnswer.initialRadioOpinion" value="supportive" class="opinion-radio-button"> <label for="initialSupportive" class="radio-labels">Supportive (Your opinion agrees with the content presented by the post.)</label>
+            </div>
+            <div class="row">
+              <input style="margin-left: 40px;" id="initialCritical" type="radio" name="myAnswer.initialRadioOpinion" ng-model="myAnswer.initialRadioOpinion" value="critical" class="opinion-radio-button"> <label for="initialCritical" class="radio-labels">Critical (Your opinion disagrees with the content presented by the post.)</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-12 question-opinion" style="margin-top: 25px;display:none;">
+          <label class="question-labels">3) Very briefly, exlpain why you agree/disagree with the content presented in the post?</label>
+          <div class="opinion-box">
+            <textarea ng-model="myAnswer.initialOpinion" class="opinion-textarea"></textarea>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-7 button">
+            <input id="submit-button" style="display:none;float:right;" class="submit-button" type="submit" ng-click="(count == 0) ? submitAnswer() : update()" />
+          </div>
+          <div class="col-sm-5 index-loader" id="loader"></div>
+        </div>
+
+      </div>
+
+      <div class="col-sm-7 change-area">
+        <div><label class="col-sm-12 question-labels" style="margin-top: 42px;">Now, carefully read the comments appearing on the post and answer the following questions.</label></div>
+<!--
+
+        <div class="col-sm-12 question-confidence">
+            <div>
+              <p class="question-labels">1) How familiar are you on the topic discussed in this post? Move the slider to denote a value. Higher values denote higher familiarity.</p>
+            </div>
+            <div class="slidecontainer" style="width:510px;">
+              <input type="range" ng-model="myAnswer.initialConfidence" min="0" max="100" value="50" step="1" id="rangeInput" oninput="output.value = rangeInput.value" class="slider">
+            </div>
+            <div class="outputcontainer">
+              <output id="output" for="rangeInput">Not Selected</output>
+            </div>
+        </div>
+
+        <div class="col-sm-12 question-radio-opinion" style="margin-top: 25px;display:none;">
+          <label class="question-labels">2) Is your opinion on this post is supportive or critical?</label>
+          <div class="opinion-radio">
+            <div class="row">
+              <input style="margin-left: 40px;" id="initialSupportive" type="radio" name="myAnswer.initialRadioOpinion" ng-model="myAnswer.initialRadioOpinion" value="supportive" class="opinion-radio-button"> <label for="initialSupportive" class="radio-labels">Supportive (Your opinion agrees with the content presented by the post.)</label>
+            </div>
+            <div class="row">
+              <input style="margin-left: 40px;" id="initialCritical" type="radio" name="myAnswer.initialRadioOpinion" ng-model="myAnswer.initialRadioOpinion" value="critical" class="opinion-radio-button"> <label for="initialCritical" class="radio-labels">Critical (Your opinion disagrees with the content presented by the post.)</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-12 question-opinion" style="margin-top: 25px;display:none;">
+          <label class="question-labels">3) Very briefly, exlpain why you agree/disagree with the content presented in the post?</label>
+          <div class="opinion-box">
+            <textarea ng-model="myAnswer.initialOpinion" class="opinion-textarea"></textarea>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-7 button">
+            <input id="submit-button" style="display:none;float:right;" class="submit-button" type="submit" ng-click="(count == 0) ? submitAnswer() : update()" />
+          </div>
+          <div class="col-sm-5 index-loader" id="loader"></div>
+        </div> -->
+
+      </div>
+
+
+      <!-- <div class="col-sm-6" id="question-area">
         <form class="form-styles">
+
+          <div class="col-"
+
           <div id="qBox" style="text-align: center; padding:15px;">
             <div class="row">
               <p class="question-text"> <span ng-if="question.questionNumber >= 0"> Q{{currentQIndex - 1}}. </span>{{question.questionText}}</p>
@@ -74,35 +189,6 @@
         <div id="loader-text" style="display: none;" class="loader-text">Loading results.. Please wait.</div>
       </div>
 
-      <div class="col-sm-6 avatardiv" id="avatar-area">
-        <div id="avatar_div" style="display:none;margin-left: 3%;margin-top:3%;">
-          <div style="font-weight:bold;margin-bottom:1%;">See how others have answered this question...</div>
-          <div class="row option-row" ng-repeat="option in feedback">
-            <div class="col-sm-3 option-box">{{option.answer}}</div>
-            <div class="col-sm-9" style="padding-left:5px;padding-right:0px;">
-              <img ng-repeat="avatar in option.value" src="./assets/{{avatar.src}}" class="avatar-box" />
-            </div>
-          </div>
-        </div>
-        <div id="loader" style="display: none;" class="loader"></div>
-        <div id="loader-text" style="display: none;" class="loader-text">Loading results.. Please wait.</div>
-      </div>
-
-      <div class="col-sm-6 namesdiv" id="names-area">
-        <div id="names_div" style="display:none;margin-left: 3%;margin-top:3%;">
-          <div style="font-weight:bold;margin-bottom:1%;">See how others have answered this question...</div>
-          <div class="row option-row" ng-repeat="option in feedback">
-            <div class="col-sm-3 option-box">{{option.answer}}</div>
-            <div class="col-sm-9 name-row">
-              <label ng-repeat="name in option.value" class="name-box">{{name.src}}</label>
-              <!-- <img ng-repeat="name in option.value" src="./assets/name-tags/{{name.src}}" class="name-box" /> -->
-            </div>
-          </div>
-        </div>
-        <div id="loader" style="display: none;" class="loader"></div>
-        <div id="loader-text" style="display: none;" class="loader-text">Loading results.. Please wait.</div>
-      </div>
-
       <div class="row">
         <div id="change-section" class="col-sm-6" style="margin-bottom:50px;display:none;float:left;margin-left:25px;padding:20px;">
           <div id="descr">
@@ -116,21 +202,8 @@
           </div>
         </div>
         <div class="col-sm-6"></div>
-      </div>
-      <div class="chatarea col-sm-6" id="chat-area">
-        <div class="minimize">
-          <!-- <img onclick="alert()" src="../assets/minimize.png" width="25" height="21" style="float:right;border-left: grey solid 1px;"> -->
-        </div>
-        <div class="textarea" id="text-area">
-          <div ng-repeat="line in history" ng-class="{'last-line':$last}">
-            <b ng-if='line.name'> {{line.name}} : </b> {{line.msg}}
-          </div>
-        </div>
-        <div class="inputarea">
-          <input type="text" ng-model="message" id="chat-text" placeholder="Type your message here.." class="text-box">
-          <button id="sendButton" ng-click="sendMessage()" style="width: 13%;">Send</button>
-        </div>
-      </div>
+      </div> -->
+
     </div>
 </body>
 
