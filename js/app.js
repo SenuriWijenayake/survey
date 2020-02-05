@@ -104,14 +104,14 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
 
   $scope.question = {};
 
-  $("input[type='range']").change(function() {
-    $scope.sliderChanged = true;
-    $("#output").css("color", "green");
-    $(".question-radio-opinion").css("display", "block");
-  });
-
   $(".question-radio-opinion").change(function() {
     $scope.radioChanged = true;
+    $(".question-confidence").css("display", "block");
+  });
+
+  $(".slider-one").change(function() {
+    $scope.sliderChanged = true;
+    $("#output").css("color", "green");
     $(".question-opinion").css("display", "block");
   });
 
@@ -151,7 +151,6 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
   });
 
   //Initialization
-  $scope.count = 0;
   $scope.myAnswer = {};
   $scope.myAnswer.initialConfidence = 50;
   $scope.myAnswer.userId = $scope.userId;
@@ -182,11 +181,17 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
         type: JSON,
       }).then(function(response) {
         console.log(response.data);
+
+        $scope.myAnswer = {};
         $(".image-area").css("display", "none");
         $(".image-area-two").css("display", "block");
 
         $(".question-area").css("display", "none");
         $(".change-area").css("display", "block");
+
+        $("input[type=radio]").attr('disabled', false);
+        $("input[type=range]").attr('disabled', false);
+        $("input[type=textarea]").attr('disabled', false);
 
       }, function(error) {
         console.log("Error occured when loading the chart");
@@ -194,195 +199,92 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
     }
   };
 
+  $scope.manipulationChanged = false;
+  $scope.changeRadioChanged = false;
+  $scope.sliderTwoChanged = false;
+  $scope.newOpinionChanged = false;
 
-  //
-  // $scope.namesFeedback = function(data) {
-  //   $scope.feedback = data.answers;
-  //
-  //   $("#loader").css("display", "none");
-  //   $("#loader-text").css("display", "none");
-  //
-  //   $("#names_div").css("display", "block");
-  //   $("#change-section").css("display", "block");
-  //
-  // };
-  //
-  // $scope.avatarFeedback = function(data) {
-  //   $scope.feedback = data.answers;
-  //
-  //   $("#loader").css("display", "none");
-  //   $("#loader-text").css("display", "none");
-  //
-  //   $("#avatar_div").css("display", "block");
-  //   $("#change-section").css("display", "block");
-  //
-  // };
-  //
-  // $scope.showSummary = function(summary) {
-  //   //Once the chart is visible add the training description
-  //   if ($scope.question.questionNumber < 0) {
-  //     $("#confidence-container").css("border", "none");
-  //     $("#change-section").css("display", "none");
-  //
-  //     if ($scope.myAnswer.mode == "control") {
-  //       $timeout(function() {
-  //         $scope.history.push({
-  //           name: "QuizBot",
-  //           msg: "The chart given above demonstrates how other participants attempted the same question. Each square represents one participant (out of a total 7) who selected the corresponding answer option."
-  //         });
-  //       }, 500);
-  //     } else if ($scope.myAnswer.mode == "avatar") {
-  //       $timeout(function() {
-  //         $scope.history.push({
-  //           name: "QuizBot",
-  //           msg: "The chart given above demonstrates how other participants attempted the same question. Each avatar represents a participant (out of a total 7) who selected the corresponding answer option."
-  //         });
-  //       }, 500);
-  //     } else {
-  //       $timeout(function() {
-  //         $scope.history.push({
-  //           name: "QuizBot",
-  //           msg: "The chart given above demonstrates how other participants attempted the same question. Each name represents a participant (out of a total 7) who selected the corresponding answer option."
-  //         });
-  //       }, 500);
-  //     }
-  //
-  //     $timeout(function() {
-  //       $scope.scrollAdjust();
-  //     }, 500);
-  //
-  //     $timeout(function() {
-  //       $scope.history.push(summary);
-  //     }, 4000);
-  //
-  //     $timeout(function() {
-  //       $scope.scrollAdjust();
-  //     }, 4000);
-  //
-  //     $timeout(function() {
-  //       $scope.history.push({
-  //         name: "QuizBot",
-  //         msg: "At this point, you may do one of the following:"
-  //       });
-  //       $scope.history.push({
-  //         msg: "Option 1 : Change the answer option and select new confidence level"
-  //       });
-  //       $scope.history.push({
-  //         msg: "Option 2 : Keep the answer option unchanged and select new confidence level"
-  //       });
-  //       $scope.history.push({
-  //         msg: "Option 3 : Make no changes and go ahead to the next question"
-  //       });
-  //     }, 8000);
-  //
-  //     $timeout(function() {
-  //       $scope.scrollAdjust();
-  //     }, 8000);
-  //
-  //     $timeout(function() {
-  //       $("#change-section").css("border", "solid red");
-  //       $("#change-section").css("display", "block");
-  //       $scope.history.push({
-  //         name: "QuizBot",
-  //         msg: "For training purposes, let's make a change to the answer. Click on 'YES' to make a change or 'NO' to go to the next question."
-  //       });
-  //     }, 12000);
-  //
-  //     $timeout(function() {
-  //       $scope.scrollAdjust();
-  //     }, 12000);
-  //
-  //   } else {
-  //     $scope.history.push(summary);
-  //     $timeout(function() {
-  //       $scope.scrollAdjust();
-  //     }, 500);
-  //   }
-  //
-  // };
-  //
-  // $scope.createChart = function(chartData) {
-  //   $scope.controlFeedback = chartData.answers;
-  //   $("#loader").css("display", "none");
-  //   $("#loader-text").css("display", "none");
-  //
-  //   $("#chart_div").css("display", "block");
-  //   $("#change-section").css("display", "block");
-  //
-  // };
-  //
-  // $scope.yes = function() {
-  //
-  //   $scope.count = 1;
-  //
-  //   $("#submit-button").css("display", "none");
-  //   $("#change-section").css("border", "none");
-  //
-  //   if ($scope.question.questionNumber < 0) {
-  //     $scope.history.push({
-  //       name: "QuizBot",
-  //       msg: "You can now change your answer and confidence."
-  //     });
-  //     $timeout(function() {
-  //       $scope.scrollAdjust();
-  //     }, 500);
-  //   } else {
-  //     $scope.history.push({
-  //       name: "QuizBot",
-  //       msg: "You can now change your answer and confidence. Click on 'Submit' to confirm your answer."
-  //     });
-  //     $timeout(function() {
-  //       $scope.scrollAdjust();
-  //     }, 500);
-  //   }
-  //
-  //   //Make the input enabled
-  //   $("input[type=radio]").attr('disabled', false);
-  //   $("input[type=range]").attr('disabled', false);
-  //
-  //   //Remove change section buttons
-  //   $("#change-section").css("display", "none");
-  //
-  //   //Set the confidence to 50
-  //   $scope.myAnswer.confidence = 50;
-  //   $scope.sliderChanged = false;
-  //   $("#output").val("Not Specified");
-  //   $("#output").css("color", "red");
-  // };
-  //
-  // $scope.update = function() {
-  //
-  //   if ($scope.sliderChanged) {
-  //
-  //     //Remove the question area and chart area
-  //     $("#question-area").css("display", "none");
-  //     $("#chart-area").css("display", "none");
-  //     $("#avatar-area").css("display", "none");
-  //     $("#names-area").css("display", "none");
-  //     $("#change-section").css("display", "none");
-  //
-  //     //Disable the button
-  //     $("#submit-button").attr("disabled", "disabled");
-  //     $("#confidence-container").css("display", "none");
-  //
-  //     $scope.myAnswer.answerId = parseInt($scope.myAnswer.answerId);
-  //     $scope.myAnswer.questionId = $scope.question.questionNumber;
-  //     $scope.myAnswer.userId = $scope.userId;
-  //     $scope.myAnswer.questionSet = $scope.questionSet;
-  //
-  //     $http({
-  //       method: 'POST',
-  //       url: api + '/updateAnswer',
-  //       data: $scope.myAnswer,
-  //       type: JSON,
-  //     }).then(function(response) {
-  //       $scope.next();
-  //     }, function(error) {
-  //       console.log("Error occured when updating the answers");
-  //     });
-  //   }
-  // };
-  //
+  $scope.sliderLikeChanged = false;
+  $scope.sliderCommChanged = false;
+  $scope.sliderShareChanged = false;
+  $scope.sliderReportChanged = false;
+
+  $(".manipulation-radio-opinion").change(function() {
+    $scope.manipulationChanged = true;
+    $(".change-radio-opinion").css("display", "block");
+  });
+
+  $(".change-radio-opinion").change(function() {
+    $scope.changeRadioChanged = true;
+    $(".change-confidence").css("display", "block");
+  });
+
+  $(".slider-two").change(function() {
+    $scope.sliderTwoChanged = true;
+    $("#outputTwo").css("color", "green");
+    $(".change-opinion").css("display", "block");
+  });
+
+  $(".change-opinion").change(function() {
+    $scope.newOpinionChanged = true;
+    if ($.trim($('.new-opinion-textarea').val()) != "") {
+      $(".responses").css("display", "block");
+    }
+  });
+
+  $(".slider-like").change(function() {
+    $scope.sliderLikeChanged = true;
+    $("#outputLike").css("color", "green");
+  });
+
+  $(".slider-comm").change(function() {
+    $scope.sliderCommChanged = true;
+    $("#outputComment").css("color", "green");
+  });
+
+  $(".slider-share").change(function() {
+    $scope.sliderShareChanged = true;
+    $("#outputShare").css("color", "green");
+  });
+
+  $(".slider-report").change(function() {
+    $scope.sliderReportChanged = true;
+    $("#outputReport").css("color", "green");
+    $("#next-button").css("display", "block");
+  });
+
+
+  $scope.update = function() {
+
+    if ($scope.manipulationChanged && $scope.changeRadioChanged && $scope.sliderTwoChanged && $scope.newOpinionChanged && $scope.sliderLikeChanged &&
+      $scope.sliderCommChanged && $scope.sliderShareChanged && $scope.sliderReportChanged) {
+
+      //Remove the question area and chart area
+      $("#change-area").css("display", "none");
+      $("#image-area-two").css("display", "none");
+
+      $scope.myAnswer.questionId = $scope.question.questionNumber;
+      $scope.myAnswer.userId = $scope.userId;
+      $scope.myAnswer.questionSet = $scope.questionSet;
+      console.log($scope.myAnswer);
+
+      $http({
+        method: 'POST',
+        url: api + '/updateAnswer',
+        data: $scope.myAnswer,
+        type: JSON,
+      }).then(function(response) {
+        $scope.next();
+      }, function(error) {
+        console.log("Error occured when updating the answers");
+      });
+    }
+  };
+
+  $scope.next = function(){
+    alert("Here");
+  };
+
   // $scope.next = function() {
   //   //Remove the question area and chart area
   //   $("#question-area").css("display", "none");
