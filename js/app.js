@@ -342,10 +342,12 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
         $("#next-button").css("display", "none");
 
         $scope.myAnswer = {};
+        $scope.myAnswer.initialOpinion = 0;
         $scope.myAnswer.initialConfidence = 50;
-        $scope.initialConfChanged = false;
-        $scope.opinionChanged = false;
+
         $scope.initialOpinionChanged = false;
+        $scope.initialTextOpinionChanged = false;
+        $scope.initialConfChanged = false;
 
         $scope.question = response.data;
 
