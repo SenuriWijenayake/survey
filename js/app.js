@@ -96,26 +96,27 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
   $scope.order = JSON.parse($window.sessionStorage.getItem('order'));
 
   $scope.question = {};
-  $scope.sliderChanged = false;
-  $scope.opinionChanged = false;
-  $scope.radioChanged = false;
-  $scope.onbeforeunloadEnabled = true;
 
+  $scope.initialOpinionChanged = false;
+  $scope.initialTextOpinionChanged = false;
+  $scope.initialConfChanged = false;
+  $scope.onbeforeunloadEnabled = true;
   $scope.question = {};
 
-  $(".question-radio-opinion").change(function() {
-    $scope.radioChanged = true;
+  $(".slider-old-opinion").change(function() {
+    $scope.initialOpinionChanged = true;
+    $("#outputInitialOpinion").css("display", "none");
     $(".question-confidence").css("display", "block");
   });
 
   $(".slider-one").change(function() {
-    $scope.sliderChanged = true;
+    $scope.initialConfChanged = true;
     $("#output").css("color", "green");
     $(".question-opinion").css("display", "block");
   });
 
   $(".question-opinion").change(function() {
-    $scope.opinionChanged = true;
+    $scope.initialTextOpinionChanged = true;
     if ($.trim($('.opinion-textarea').val()) != "") {
       $("#submit-button").css("display", "block");
     } else {
@@ -151,25 +152,14 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
 
   //Initialization
   $scope.myAnswer = {};
+  $scope.myAnswer.initialOpinion = 0;
   $scope.myAnswer.initialConfidence = 50;
-  $scope.myAnswer.newConfidence = 50;
-
-  $scope.manipulationChanged = false;
-  $scope.changeRadioChanged = false;
-  $scope.sliderTwoChanged = false;
-  $scope.newOpinionChanged = false;
-
-  $scope.sliderLikeChanged = false;
-  $scope.sliderCommChanged = false;
-  $scope.sliderShareChanged = false;
-  $scope.sliderReportChanged = false;
-
   $scope.myAnswer.userId = $scope.userId;
   $scope.myAnswer.questionSet = $scope.questionSet;
 
   $scope.submitAnswer = function() {
 
-    if ($scope.sliderChanged && $scope.radioChanged && $scope.opinionChanged) {
+    if ($scope.initialOpinionChanged && $scope.initialConfChanged && $scope.initialTextOpinionChanged) {
       //Remove the button
       $("#submit-button").css("display", "none");
       //Disbling the input
@@ -191,14 +181,21 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
         data: $scope.myAnswer,
         type: JSON,
       }).then(function(response) {
-        console.log(response.data);
+        //Loader removed
+        $("#index-loader").css("display", "none");
 
-        $scope.myAnswer = {};
-        $scope.myAnswer.newConfidence = 50;
+        $scope.newAnswer = {};
+        $scope.newAnswer.newOpinion = 0;
+        $scope.newAnswer.newConfidence = 50;
+        $scope.newAnswer.like = 50;
+        $scope.newAnswer.comment = 50;
+        $scope.newAnswer.share = 50;
+        $scope.newAnswer.report = 50;
+
         $scope.manipulationChanged = false;
-        $scope.changeRadioChanged = false;
-        $scope.sliderTwoChanged = false;
         $scope.newOpinionChanged = false;
+        $scope.newTextOpinionChanged = false;
+        $scope.newConfChanged = false;
 
         $scope.sliderLikeChanged = false;
         $scope.sliderCommChanged = false;
@@ -237,19 +234,20 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
     $(".change-radio-opinion").css("display", "block");
   });
 
-  $(".change-radio-opinion").change(function() {
-    $scope.changeRadioChanged = true;
+  $(".slider-new-opinion").change(function() {
+    $scope.newOpinionChanged = true;
+    $("#outputNewOpinion").css("display", "none");
     $(".change-confidence").css("display", "block");
   });
 
   $(".slider-two").change(function() {
-    $scope.sliderTwoChanged = true;
+    $scope.newConfChanged = true;
     $("#outputTwo").css("color", "green");
     $(".change-opinion").css("display", "block");
   });
 
   $(".change-opinion").change(function() {
-    $scope.newOpinionChanged = true;
+    $scope.newTextOpinionChanged = true;
     if ($.trim($('.new-opinion-textarea').val()) != "") {
       $(".responses").css("display", "block");
     }
@@ -278,22 +276,22 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
 
   $scope.update = function() {
 
-    if ($scope.manipulationChanged && $scope.changeRadioChanged && $scope.sliderTwoChanged && $scope.newOpinionChanged && $scope.sliderLikeChanged &&
+    if ($scope.manipulationChanged && $scope.newOpinionChanged && $scope.newConfChanged && $scope.newTextOpinionChanged && $scope.sliderLikeChanged &&
       $scope.sliderCommChanged && $scope.sliderShareChanged && $scope.sliderReportChanged) {
 
       //Remove the question area and chart area
       $(".change-area").css("display", "none");
       $(".image-area-two").css("display", "none");
 
-      $scope.myAnswer.questionId = $scope.question.questionNumber;
-      $scope.myAnswer.userId = $scope.userId;
-      $scope.myAnswer.questionSet = $scope.questionSet;
-      console.log($scope.myAnswer);
+      $scope.newAnswer.questionId = $scope.question.questionNumber;
+      $scope.newAnswer.userId = $scope.userId;
+      $scope.newAnswer.questionSet = $scope.questionSet;
+      console.log($scope.newAnswer);
 
       $http({
         method: 'POST',
         url: api + '/updateAnswer',
-        data: $scope.myAnswer,
+        data: $scope.newAnswer,
         type: JSON,
       }).then(function(response) {
         $scope.next();
@@ -345,9 +343,9 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
 
         $scope.myAnswer = {};
         $scope.myAnswer.initialConfidence = 50;
-        $scope.sliderChanged = false;
+        $scope.initialConfChanged = false;
         $scope.opinionChanged = false;
-        $scope.radioChanged = false;
+        $scope.initialOpinionChanged = false;
 
         $scope.question = response.data;
 

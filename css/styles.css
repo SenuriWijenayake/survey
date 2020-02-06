@@ -4,7 +4,7 @@
   font-weight: bold;
   color: red;
   padding: 15px;
-  background: lightgray;
+  background: #EEEEEE;
 }
 
 .image-area{
@@ -46,6 +46,19 @@
   font-size: 14px;
 }
 
+.opinion-box{
+  padding: 10px;
+}
+
+.binary-opinion{
+  margin-top: 10px;
+}
+
+table{
+border-collapse:separate;
+border-spacing: 0px 20px;
+}
+
 .new-opinion-textarea{
   width: 100%;
   height: 80px;
@@ -54,7 +67,8 @@
 }
 
 .special-output{
-  margin-top:0px! important;
+  margin-top: -8px! important;
+  font-size: medium;
 }
 
 .radio-labels{
@@ -66,6 +80,15 @@
 .image-area-two{
   display: none;
   padding: 30px;
+}
+
+.not-selected-label{
+  display: block;
+  margin-top: 15px;
+  color: red;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
 }
 
 .message-text{
@@ -487,6 +510,12 @@ input[type=radio]+label>img {
   margin-right: auto;
 }
 
+.slidecontainer-new {
+  width: 75%;
+  margin-left: -3%;
+  margin-right: auto;
+}
+
 .outputcontainer {
   width: 75%;
   margin-left: auto;
@@ -714,6 +743,13 @@ input[type='range']:focus {
 .slidecontainer:after {
   color: #777;
   content: '0 25 50 75 100';
+  word-spacing: 104px;
+  z-index: -1;
+}
+
+.slidecontainer-new:after {
+  color: #777;
+  content: '';
   word-spacing: 104px;
   z-index: -1;
 }

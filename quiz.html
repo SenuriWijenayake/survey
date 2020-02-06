@@ -40,8 +40,19 @@
         <div><label class="col-sm-12 question-labels">Assume that this post appears on your Facebook news feed as shared by one of your distant friends.</label></div>
 
         <div class="col-sm-12 question-radio-opinion" style="margin-top: 25px;">
-          <label class="question-labels">1) Is your opinion on this post is supportive or critical?</label>
-          <div class="opinion-radio">
+          <label class="question-labels">1) If you were to comment on this post, would your comment be mostly supportive or mostly critical of the content in the post?</label>
+          <div class="binary-opinion col-sm-12">
+            <label class="col-sm-2">Mostly Supportive</label>
+            <div class="slidecontainer-new col-sm-10" style="width:510px;">
+              <input type="range" ng-model="myAnswer.initialOpinion" min="-50" max="50" value="0" step="1" id="rangeInitialOpinion" oninput="outputInitialOpinion.value = rangeInitialOpinion.value" class="slider-old-opinion">
+              <div class="outputcontainer">
+                <label id="outputInitialOpinion" class="not-selected-label">Not Selected</label>
+              </div>
+            </div>
+            <label class="col-sm-1">Mostly Critical</label>
+          </div>
+
+          <!-- <div class="opinion-radio">
             <div class="row">
               <input style="margin-left: 40px;" id="initialSupportive" type="radio" name="myAnswer.initialRadioOpinion" ng-model="myAnswer.initialRadioOpinion" value="supportive" class="opinion-radio-button"> <label for="initialSupportive" class="radio-labels">Supportive
                 (Your opinion agrees with the content presented by the post.)</label>
@@ -50,10 +61,10 @@
               <input style="margin-left: 40px;" id="initialCritical" type="radio" name="myAnswer.initialRadioOpinion" ng-model="myAnswer.initialRadioOpinion" value="critical" class="opinion-radio-button"> <label for="initialCritical" class="radio-labels">Critical
                 (Your opinion disagrees with the content presented by the post.)</label>
             </div>
-          </div>
+          </div> -->
         </div>
 
-        <div class="col-sm-12 question-confidence" style="display:none;">
+        <div class="col-sm-12 question-confidence" style="display:none;margin-top: 25px;">
           <div>
             <p class="question-labels">2) How confident are you of your opinion on this topic? Move the slider to denote a value. Higher values denote higher familiarity.</p>
           </div>
@@ -69,15 +80,15 @@
         <div class="col-sm-12 question-opinion" style="margin-top: 25px;display:none;">
           <label class="question-labels">3) Very briefly, exlpain why you agree/disagree with the content presented in the post?</label>
           <div class="opinion-box">
-            <textarea ng-model="myAnswer.initialOpinion" class="opinion-textarea"></textarea>
+            <textarea ng-model="myAnswer.initialTextOpinion" class="opinion-textarea"></textarea>
           </div>
         </div>
 
         <div class="row">
-          <div class="col-sm-7 button">
+          <div class="col-sm-8 button" style="margin-left: -3%;">
             <input id="submit-button" style="display:none;float:right;" class="submit-button" type="submit" ng-click="submitAnswer()" />
           </div>
-          <div class="col-sm-5 index-loader" id="loader"></div>
+          <div class="col-sm-4 index-loader" id="loader"></div>
         </div>
 
       </div>
@@ -93,35 +104,45 @@
         <div><label class="col-sm-12 question-labels">Now, carefully read the comments appearing on the post and answer the following questions.</label></div>
 
         <div class="col-sm-12 manipulation-radio-opinion">
-          <label class="question-labels">1) Is the majority's opinion on this post supportive or critical?</label>
+          <label class="question-labels">1) Would you say the majority of the comments is mostly supportive or mostly critical of the content in the post??</label>
           <div class="opinion-radio">
             <div class="row">
-              <input style="margin-left: 40px;" id="manipulationSupportive" type="radio" name="myAnswer.manipulationRadioOpinion" ng-model="myAnswer.manipulationRadioOpinion" value="supportive" class="opinion-radio-button"> <label for="manipulationSupportive"
+              <input style="margin-left: 40px;" id="manipulationSupportive" type="radio" name="newAnswer.manipulationRadioOpinion" ng-model="newAnswer.manipulationRadioOpinion" value="supportive" class="opinion-radio-button"> <label for="manipulationSupportive"
                 class="radio-labels">Supportive (Majority agrees with the content presented by the post.)</label>
             </div>
             <div class="row">
-              <input style="margin-left: 40px;" id="manipulationCritical" type="radio" name="myAnswer.manipulationRadioOpinion" ng-model="myAnswer.manipulationRadioOpinion" value="critical" class="opinion-radio-button"> <label for="manipulationCritical"
+              <input style="margin-left: 40px;" id="manipulationCritical" type="radio" name="newAnswer.manipulationRadioOpinion" ng-model="newAnswer.manipulationRadioOpinion" value="critical" class="opinion-radio-button"> <label for="manipulationCritical"
                 class="radio-labels">Critical (Majority disagrees with the content presented by the post.)</label>
             </div>
             <div class="row">
-              <input style="margin-left: 40px;" id="manipulationNeutral" type="radio" name="myAnswer.manipulationRadioOpinion" ng-model="myAnswer.manipulationRadioOpinion" value="neutral" class="opinion-radio-button"> <label for="manipulationNeutral"
+              <input style="margin-left: 40px;" id="manipulationNeutral" type="radio" name="newAnswer.manipulationRadioOpinion" ng-model="newAnswer.manipulationRadioOpinion" value="neutral" class="opinion-radio-button"> <label for="manipulationNeutral"
                 class="radio-labels">An equal number of comments both agree and disagree with the content presented by the post.</label>
             </div>
           </div>
         </div>
 
         <div class="col-sm-12 change-radio-opinion" style="margin-top: 25px;display:none;">
-          <label class="question-labels">2) After reading the comments, is your opinion on this post supportive or critical?</label>
-          <div class="opinion-radio">
+          <label class="question-labels">2) After reading the comments, would your comment be mostly supportive or mostly critical of the content in the post?</label>
+          <div class="binary-opinion col-sm-12">
+            <label class="col-sm-2">Mostly Supportive</label>
+            <div class="slidecontainer-new col-sm-10" style="width:510px;">
+              <input type="range" ng-model="newAnswer.newOpinion" min="-50" max="50" value="0" step="1" id="rangeNewOpinion" class="slider-new-opinion">
+              <div class="outputcontainer">
+                <label id="outputNewOpinion" class="not-selected-label">Not Selected</label>
+              </div>
+            </div>
+            <label class="col-sm-1">Mostly Critical</label>
+          </div>
+          <!-- <div class="opinion-radio">
             <div class="row">
-              <input style="margin-left: 40px;" id="newSupportive" type="radio" name="myAnswer.newRadioOpinion" ng-model="myAnswer.newRadioOpinion" value="supportive" class="opinion-radio-button"> <label for="newSupportive" class="radio-labels">Supportive
+              <input style="margin-left: 40px;" id="newSupportive" type="radio" name="newAnswer.newRadioOpinion" ng-model="myAnswer.newRadioOpinion" value="supportive" class="opinion-radio-button"> <label for="newSupportive" class="radio-labels">Supportive
                 (Your opinion agrees with the content presented by the post.)</label>
             </div>
             <div class="row">
-              <input style="margin-left: 40px;" id="newCritical" type="radio" name="myAnswer.newRadioOpinion" ng-model="myAnswer.newRadioOpinion" value="critical" class="opinion-radio-button"> <label for="newCritical" class="radio-labels">Critical
+              <input style="margin-left: 40px;" id="newCritical" type="radio" name="newAnswer.newRadioOpinion" ng-model="myAnswer.newRadioOpinion" value="critical" class="opinion-radio-button"> <label for="newCritical" class="radio-labels">Critical
                 (Your opinion disagrees with the content presented by the post.)</label>
             </div>
-          </div>
+          </div> -->
         </div>
 
         <div class="col-sm-12 change-confidence" style="display:none;margin-top:25px;">
@@ -129,7 +150,7 @@
             <p class="question-labels">3) After reading the comments, how familiar are you with the topic discussed in this post? Move the slider to denote a value. Higher values denote higher familiarity.</p>
           </div>
           <div class="slidecontainer" style="width:510px;">
-            <input type="range" ng-model="myAnswer.newConfidence" min="0" max="100" value="50" step="1" id="rangeInputTwo" oninput="outputTwo.value = rangeInputTwo.value" class="slider-two">
+            <input type="range" ng-model="newAnswer.newConfidence" min="0" max="100" value="50" step="1" id="rangeInputTwo" oninput="outputTwo.value = rangeInputTwo.value" class="slider-two">
           </div>
           <div class="outputcontainer">
             <output id="outputTwo" for="rangeInputTwo">Not Selected</output>
@@ -139,11 +160,11 @@
         <div class="col-sm-12 change-opinion" style="margin-top: 25px;display:none;">
           <label class="question-labels">4) Very briefly, exlpain why you agree/disagree with the content presented in the post?</label>
           <div class="opinion-box">
-            <textarea ng-model="myAnswer.newOpinion" class="new-opinion-textarea"></textarea>
+            <textarea ng-model="newAnswer.newTextOpinion" class="new-opinion-textarea"></textarea>
           </div>
         </div>
 
-        <div class="col-sm-12 responses" style="display:none;margin-top:25px;">
+        <div class="col-sm-12 responses" style="display:none;margin-top:20px;">
           <div>
             <p class="question-labels">5) After reading the comments, how likely are you to...</p>
           </div>
@@ -152,7 +173,7 @@
               <td class="col-sm-2"><label class="question-labels">Like</label></td>
               <td class="col-sm-10">
                 <div class="slidecontainer" style="width:510px;">
-                  <input type="range" ng-model="myAnswer.like" min="0" max="100" value="50" step="1" id="rangeLike" oninput="outputLike.value = rangeLike.value" class="slider-like">
+                  <input type="range" ng-model="newAnswer.like" min="0" max="100" value="50" step="1" id="rangeLike" oninput="outputLike.value = rangeLike.value" class="slider-like">
                 </div>
                 <div class="outputcontainer">
                   <output id="outputLike" for="rangeLike" class="special-output">Not Selected</output>
@@ -164,7 +185,7 @@
               <td class="col-sm-2"><label class="question-labels">Comment</label></td>
               <td class="col-sm-10">
                 <div class="slidecontainer" style="width:510px;">
-                  <input type="range" ng-model="myAnswer.comment" min="0" max="100" value="50" step="1" id="rangeComment" oninput="outputComment.value = rangeComment.value" class="slider-comm">
+                  <input type="range" ng-model="newAnswer.comment" min="0" max="100" value="50" step="1" id="rangeComment" oninput="outputComment.value = rangeComment.value" class="slider-comm">
                 </div>
                 <div class="outputcontainer">
                   <output id="outputComment" for="rangeComment" class="special-output">Not Selected</output>
@@ -176,7 +197,7 @@
               <td class="col-sm-2"><label class="question-labels">Share</label></td>
               <td class="col-sm-10">
                 <div class="slidecontainer" style="width:510px;">
-                  <input type="range" ng-model="myAnswer.share" min="0" max="100" value="50" step="1" id="rangeShare" oninput="outputShare.value = rangeShare.value" class="slider-share">
+                  <input type="range" ng-model="newAnswer.share" min="0" max="100" value="50" step="1" id="rangeShare" oninput="outputShare.value = rangeShare.value" class="slider-share">
                 </div>
                 <div class="outputcontainer">
                   <output id="outputShare" for="rangeShare" class="special-output">Not Selected</output>
@@ -188,7 +209,7 @@
               <td class="col-sm-2"><label class="question-labels">Report</label></td>
               <td class="col-sm-10">
                 <div class="slidecontainer" style="width:510px;">
-                  <input type="range" ng-model="myAnswer.report" min="0" max="100" value="50" step="1" id="rangeReport" oninput="outputReport.value = rangeReport.value" class="slider-report">
+                  <input type="range" ng-model="newAnswer.report" min="0" max="100" value="50" step="1" id="rangeReport" oninput="outputReport.value = rangeReport.value" class="slider-report">
                 </div>
                 <div class="outputcontainer">
                   <output id="outputReport" for="rangeReport" class="special-output">Not Selected</output>
