@@ -96,6 +96,34 @@ app.controller('HomeController', function($scope, $http, $window) {
 
 app.controller('QuizController', function($scope, $http, $window, $timeout) {
 
+
+  $scope.startTimer = function() {
+      // Set the date we're counting down to
+      var dt = new Date();
+      dt.setMinutes(dt.getMinutes() + 1);
+      var countDownDate = dt;
+
+      // Update the count down every 1 second
+      x = setInterval(function() {
+        // Get today's date and time
+        var now = new Date().getTime();
+        // Find the distance between now and the count down date
+        var distance = countDownDate - now;
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Display the result in the element with id="demo"
+        document.getElementById("timer").innerHTML = "Time remaining : " + minutes + "m " + seconds + "s ";
+
+        // If the count down is finished, write some text
+        if (distance < 0) {
+          //Stop the timer
+          clearInterval(x);
+          document.getElementById("timer").innerHTML = "Your time is up!";
+        }
+      }, 500);
+    };
+
   $scope.currentQIndex = 0;
 
   $scope.userId = $window.sessionStorage.getItem('userId');
@@ -109,6 +137,9 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
   $scope.initialConfChanged = false;
   $scope.onbeforeunloadEnabled = true;
   $scope.question = {};
+
+  //Start timer
+  $scope.startTimer();
 
   $(".slider-old-opinion").change(function() {
     $scope.initialOpinionChanged = true;
@@ -369,5 +400,6 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
       });
     }
   };
+
 
 });

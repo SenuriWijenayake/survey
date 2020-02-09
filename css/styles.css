@@ -103,15 +103,11 @@ border-spacing: 0px 20px;
 }
 
 .timer{
-  margin-bottom:50px;
-  margin-left:3%;
-  padding:20px;
-  width:50%;
-  border: solid red;
+  padding:10px;
+  border: 1px solid red;
   color: red;
   text-align: center;
-  font-size: 33px;
-  display: none;
+  font-size: 26px;
 }
 
 .timestamp{
