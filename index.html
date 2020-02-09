@@ -4,7 +4,7 @@
 <html>
 
 <head>
-  <title>Welcome!</title>
+  <title>Study on Facebook News Articles - Informed Consent Form</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -16,13 +16,84 @@
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="./css/styles.css">
+
+  <script type="text/javascript">
+    function onexit() {
+      self.close();
+    }
+  </script>
+
 </head>
 
 <body>
 
   <div ng-app="app" ng-controller="HomeController">
     <div class="index-main-container">
-      <div class="col-sm-6 index-container">
+
+      <div class="col-sm-12 landing-page">
+        <div id="consent">
+          <h1>We need your consent to proceed</h1>
+          <hr />
+          <div class="legal well">
+            <p>
+              You have been contacted via the Amazon MTurk platform to invite you to participate in our study investigating
+              the effect of user comments on the trustworthiness of Facebook posts. <br/>
+
+              To successfully complete the HIT, you will be required to <b>TWO</b> tasks. <br/>
+
+              <br/><b>Task 1:</b> You will be required to analyse 28 recent Facebook posts, each containing a news article. You will be asked to provide your opinion on the trustworthiness of each post, both before and after seeing user comments. Subsequently, you will be asked to rate how likely you are to like, comment, share or report the post. This process will be repeated 28 times, and is estimated to take up 50 minutes.
+
+              <br/><br/><b>Task 2:</b> Upon successful completion of task 1, you will be required to complete a 44-item personality questionnaire. This is expected to take 5 minutes.
+
+              <br/><br/><b>**</b> You are expected to complete <b>BOTH</b> tasks in <b>one sitting</b>, which will take approximately 1 hour.
+              <br/><b>**</b> Do <b>NOT refresh</b> the page, or use <b>forward and back</b> controls of the web browser during the experiment. If you do so, your data will be lost and you will not receive any payment.
+
+              <br/><br/>No identifying information will be collected as part of our research data, and while participation will involve the recording of your worker ID, this will be removed from the data immediately after download. We will therefore not be able to identify your particular responses in our data.
+
+              We do not anticipate any risks to you from participation. You will receive the agreed upon value of <b>$14 (USD)</b> for the completion of the HIT. Participation is voluntary and you have the right to withdraw from further participation at any stage up to the submission of your data.
+              However, you will <b>not receive any payment</b> if you decide to abandon the task before completion.
+              Submission of the final results in Task 2 will be taken as an indication of your consent.
+            </p>
+            <p>
+              If you would like more information about the project, please contact the researchers using the Amazon's communication functionality.
+
+            </p>
+            <p>
+              Who can I contact if I have any concerns about the project?
+            </p>
+            <p>
+              This research project has been approved by the Human Research Ethics Committee of The University of Melbourne. If you have any concerns or complaints about the conduct of this research project (Ethics ID: 2056168), which you do not wish to discuss with the
+              research team, you should contact the Manager, Human Research Ethics, Research Ethics and Integrity, University of Melbourne, VIC 3010. Tel: +61 3 8344 2073 or Email: HumanEthics-complaints@unimelb.edu.au. All complaints will be
+              treated confidentially. In any correspondence please provide the name of the research team or the name or ethics ID number of the research project.
+
+            </p>
+
+            <button type="button" class="btn btn-default btn-sm" onClick="window.print();">
+              <span class="glyphicon glyphicon-print"></span> Print a copy of this
+            </button>
+          </div>
+
+          <hr />
+          <h4>Do you understand and consent to these terms?</h4>
+          <br />
+
+          <center>
+            <button type="button" class="btn btn-primary btn-lg" ng-click="display()">
+              <span class="glyphicon glyphicon-ok"></span> I agree
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button type="button" class="btn btn-danger btn-lg" onClick="onexit()">
+              <span class="glyphicon glyphicon-ban-circle"></span> No thanks, I do not want to do this HIT
+            </button>
+          </center>
+
+        </div>
+
+      </div>
+
+      <div id="demographics" class="col-sm-12 index-container" style="display:none;">
         <div class="welcome-text">Welcome!</div>
         <div style="margin-bottom: 10px; font-size:16px;">
           Thank you for agreeing to participate in this study. <br>
@@ -76,36 +147,43 @@
               <!--Level of Education-->
               <tr class="row">
                 <td class="col-sm-6 right padding-adjust-labels"> Level of Education Completed: <span style="color:red;">*</span> </td>
-                <td class="col-sm-6 padding-adjust-radio"> <input type="radio" name="user.education" ng-model="user.education" value="some-high-school" class="edu-radio-button" id="some-high-school" required> <label for="some-high-school" class="gender-label"> Some high school </label></td>
+                <td class="col-sm-6 padding-adjust-radio"> <input type="radio" name="user.education" ng-model="user.education" value="some-high-school" class="edu-radio-button" id="some-high-school" required> <label for="some-high-school" class="gender-label">
+                    Some high school </label></td>
               </tr>
               <tr class="row">
                 <td class="col-sm-6 right"></td>
-                <td class="col-sm-6"> <input type="radio" name="user.education" ng-model="user.education" value="high-school-graduate" class="edu-radio-button" id="high-school-graduate"> <label for="high-school-graduate" class="gender-label"> High school graduate </label></td>
+                <td class="col-sm-6"> <input type="radio" name="user.education" ng-model="user.education" value="high-school-graduate" class="edu-radio-button" id="high-school-graduate"> <label for="high-school-graduate" class="gender-label"> High
+                    school graduate </label></td>
               </tr>
               <tr class="row">
                 <td class="col-sm-6 right"></td>
-                <td class="col-sm-6"> <input type="radio" name="user.education" ng-model="user.education" value="some-college" class="edu-radio-button" id="some-college"> <label for="some-college" class="gender-label"> Some college, no degree </label></td>
+                <td class="col-sm-6"> <input type="radio" name="user.education" ng-model="user.education" value="some-college" class="edu-radio-button" id="some-college"> <label for="some-college" class="gender-label"> Some college, no degree
+                  </label></td>
               </tr>
               <tr class="row">
                 <td class="col-sm-6 right"></td>
-                <td class="col-sm-6"> <input type="radio" name="user.education" ng-model="user.education" value="associate-degree" class="edu-radio-button" id="associate-degree"> <label for="associate-degree" class="gender-label"> Associate degree </label></td>
+                <td class="col-sm-6"> <input type="radio" name="user.education" ng-model="user.education" value="associate-degree" class="edu-radio-button" id="associate-degree"> <label for="associate-degree" class="gender-label"> Associate degree
+                  </label></td>
               </tr>
               <tr class="row">
                 <td class="col-sm-6 right"></td>
-                <td class="col-sm-6"> <input type="radio" name="user.education" ng-model="user.education" value="bachelors-degree" class="edu-radio-button" id="bachelors-degree"> <label for="bachelors-degree" class="gender-label"> Bachelor's degree </label></td>
+                <td class="col-sm-6"> <input type="radio" name="user.education" ng-model="user.education" value="bachelors-degree" class="edu-radio-button" id="bachelors-degree"> <label for="bachelors-degree" class="gender-label"> Bachelor's degree
+                  </label></td>
               </tr>
               <tr class="row">
                 <td class="col-sm-6 right"></td>
-                <td class="col-sm-6"> <input type="radio" name="user.education" ng-model="user.education" value="masters-degree" class="edu-radio-button" id="masters-degree"> <label for="masters-degree" class="gender-label"> Graduate degree - Master's </label></td>
+                <td class="col-sm-6"> <input type="radio" name="user.education" ng-model="user.education" value="masters-degree" class="edu-radio-button" id="masters-degree"> <label for="masters-degree" class="gender-label"> Graduate degree -
+                    Master's </label></td>
               </tr>
               <tr class="row">
                 <td class="col-sm-6 right"></td>
-                <td class="col-sm-6"> <input type="radio" name="user.education" ng-model="user.education" value="doctoral-degree" class="edu-radio-button" id="doctoral-degree"> <label for="doctoral-degree" class="gender-label"> Graduate degree - Doctorate </label></td>
+                <td class="col-sm-6"> <input type="radio" name="user.education" ng-model="user.education" value="doctoral-degree" class="edu-radio-button" id="doctoral-degree"> <label for="doctoral-degree" class="gender-label"> Graduate degree -
+                    Doctorate </label></td>
               </tr>
               <tr class="row">
                 <td class="col-sm-6 right"></td>
                 <td class="col-sm-6">
-                  <input type="radio" name="user.education" ng-model="user.education" value="education-specified" class="edu-radio-button" id="education-specified"> <label for="education-specified" class="gender-label"> Other : </label>
+                  <input type="radio" name="user.education" ng-model="user.education" value="education-specified" class="edu-radio-button" id="education-specified"> <label for="education-specified" class="specify-label"> Other : </label>
                   <input type="text" id="education-text" ng-model="user.educationSpecified" class="edu-specify-text" disabled>
                 </td>
               </tr>
@@ -120,7 +198,7 @@
             <br>
 
             <div class="row">
-              <div class="col-sm-8">
+              <div class="col-sm-12">
                 <button id="index-next" class="index-next" ng-click="indexNext(user)">Next</button>
               </div>
             </div>
@@ -129,41 +207,41 @@
         </div>
       </div>
 
-      <div id="index-instructions" class="col-sm-5 index-container" style="text-align:center;margin-left: 25px;display:none;">
-        <div class="welcome-text">What do I have to do?</div>
-        <div style="font-size:16px;">You will see screenshots of several <b>Facebook</b> posts. <br/>
-          Imagine that they appear on your news feed as shared by a <b>distant friend</b>. <br/>
+      <div id="index-instructions" class="col-sm-12 index-container" style="text-align:center;margin-left: 25px;display:none;">
+        <div class="welcome-text">Task 1</div>
+        <div style="font-size:16px;">You will see screenshots of several <b>Facebook</b> posts. <br />
+          Imagine that they appear on your news feed as shared by a <b>distant friend</b>. <br />
           Read the posts carefully and,</div>
 
 
         <div class="row instruction">
-          <div class="col-sm-2"><img src="./assets/icons/1.png" width = "50"></div>
+          <div class="col-sm-2"><img src="./assets/icons/1.png" width="50"></div>
           <div class="col-sm-10 instruction-text">Provide your <b>opinion</b> and <b>familiarity</b> with the topic discussed.</div>
         </div>
 
         <div class="row instruction">
-          <div class="col-sm-2"><img src="./assets/icons/2.svg" width = "50"></div>
+          <div class="col-sm-2"><img src="./assets/icons/2.svg" width="50"></div>
           <div class="col-sm-10 instruction-text">See how other Facebook users have <b>commented</b> on the post. </div>
         </div>
 
         <div class="row instruction">
-          <div class="col-sm-2"><img src="./assets/icons/3.svg" width = "50"></div>
+          <div class="col-sm-2"><img src="./assets/icons/3.svg" width="50"></div>
           <div class="col-sm-10 instruction-text">Identify the majority's <b>sentiment</b> (supportive or critical of the post), after reading user comments.</div>
         </div>
 
         <div class="row instruction">
-          <div class="col-sm-2"><img src="./assets/icons/4.png" width = "50"></div>
+          <div class="col-sm-2"><img src="./assets/icons/4.png" width="50"></div>
           <div class="col-sm-10 instruction-text">Repeat <b>Step 1</b>, after reading user comments.</div>
         </div>
 
         <div class="row instruction">
-          <div class="col-sm-2"><img src="./assets/icons/5.svg" width = "50"></div>
+          <div class="col-sm-2"><img src="./assets/icons/5.svg" width="50"></div>
           <div class="col-sm-10 instruction-text">Tell us how you would <b>respond</b> (like / share / comment / report) to the post.</div>
         </div>
 
         <div class="row" id="submit-section">
-          <div class="col-sm-9">
-            <button id="index-submit-button" class="index-submit" style="float:right;" ng-click="submitDetails(user)">Let's get started!</button>
+          <div class="col-sm-12">
+            <button id="index-submit-button" class="index-submit" ng-click="submitDetails(user)">Let's get started!</button>
           </div>
         </div>
 

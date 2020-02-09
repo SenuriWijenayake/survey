@@ -19,6 +19,12 @@ app.controller('HomeController', function($scope, $http, $window) {
   $scope.user = {};
   $scope.user.questionSet = "1"; // This will be hardcoded based on the question set
 
+  $scope.display = function(){
+    $window.sessionStorage.setItem('consentTime', Date.now());
+    $(".landing-page").css("display", "none");
+    $("#demographics").css("display", "block");
+  };
+
   $('.gender-radio-button').change(function() {
     if (this.id == "gender-specified"){
       $('#gender-text').prop('disabled', false);
@@ -43,8 +49,8 @@ app.controller('HomeController', function($scope, $http, $window) {
 
   $scope.indexNext = function(user) {
     if (user.gender && user.age && user.age >=18 && user.education && user.socialmedia && (user.gender == "gender-specified" ? user.genderSpecified : true) && (user.education == "education-specified" ? user.educationSpecified : true)) {
-      $("#index-next").attr('disabled', true);
 
+      $("#index-next").attr('disabled', true);
       $(".input-text").attr('disabled', true);
       $(".specify-text").attr('disabled', true);
       $(".edu-specify-text").attr('disabled', true);
@@ -54,6 +60,7 @@ app.controller('HomeController', function($scope, $http, $window) {
       $(".edu-radio-button").attr('disabled', true);
 
       $("#index-next").css('background-color', 'grey');
+      $("#demographics").css("display", "none");
       $("#index-instructions").css("display", "block");
     }
   };

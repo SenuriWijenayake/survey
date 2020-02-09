@@ -321,16 +321,18 @@ input[type=radio]+label>img {
 }
 
 .specify-text {
-  width: 37%;
+  float: left;
+  /* width: 37%; */
 }
 
 .edu-specify-text {
-  width: 60%;
+  float: left;
+  /* width: 60%; */
 }
 
 .index-next {
-  float: right;
-  width: 40%;
+  /* float: right; */
+  width: 20%;
   height: 43px;
   background-color: #117A65;
   font-size: 19px;
@@ -344,6 +346,9 @@ input[type=radio]+label>img {
   background: #D6EAF8;
   border-radius: 9px;
   padding: 6px;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .index-container {
@@ -471,8 +476,8 @@ input[type=radio]+label>img {
 
 .index-submit {
   margin-top: 18px;
-  float: right;
-  width: 60%;
+  /* float: right; */
+  width: 20%;
   height: 43px;
   background-color: #117A65;
   font-size: 19px;
@@ -607,7 +612,7 @@ input[type=radio]+label>img {
 
 .input-text {
   float: left;
-  width: 75%;
+  /* width: 75%; */
 }
 
 .confidence-text {
