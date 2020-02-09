@@ -2,7 +2,7 @@
   text-align: center;
   font-size: 20px;
   font-weight: bold;
-  color: red;
+  color: darkblue;
   padding: 15px;
   background: #EEEEEE;
 }
@@ -475,7 +475,8 @@ input[type=radio]+label>img {
   /* float: right; */
   width: 20%;
   height: 43px;
-  background-color: #117A65;
+  /* background-color: #117A65; */
+  background-color: grey;
   font-size: 19px;
   color: white;
   border: 1px solid #117A65;

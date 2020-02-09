@@ -15,7 +15,7 @@ app.controller('BigFiveController', function($scope, $http, $window) {
 
 });
 
-app.controller('HomeController', function($scope, $http, $window) {
+app.controller('HomeController', function($scope, $http, $window, $timeout) {
   $scope.user = {};
   $scope.user.questionSet = "1"; // This will be hardcoded based on the question set
 
@@ -60,8 +60,15 @@ app.controller('HomeController', function($scope, $http, $window) {
       $(".edu-radio-button").attr('disabled', true);
 
       $("#index-next").css('background-color', 'grey');
+
       $("#demographics").css("display", "none");
       $("#index-instructions").css("display", "block");
+      $("#index-submit-button").attr('disabled', true);
+
+      $timeout( function(){
+        $("#index-submit-button").css("background-color", "#117A65");
+        $("#index-submit-button").attr('disabled', false);
+      }, 10000);
     }
   };
 
@@ -100,7 +107,7 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
   $scope.startTimer = function() {
       // Set the date we're counting down to
       var dt = new Date();
-      dt.setMinutes(dt.getMinutes() + 1);
+      dt.setMinutes(dt.getMinutes() + 60);
       var countDownDate = dt;
 
       // Update the count down every 1 second
