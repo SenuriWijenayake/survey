@@ -410,7 +410,7 @@ input[type=radio]+label>img {
 }
 
 .container {
-  padding: 20px ! important;
+  /* padding: 20px ! important; */
 }
 
 .submit {

@@ -3,6 +3,36 @@ var app = angular.module('app', []);
 var api = 'http://localhost:5000';
 
 app.controller('BigFiveController', function($scope, $http, $window) {
+
+  $scope.startTimer = function() {
+    // Set the date we're counting down to
+    var dt = new Date();
+    dt.setMinutes(dt.getMinutes() + 5);
+    var countDownDate = dt;
+
+    // Update the count down every 1 second
+    x = setInterval(function() {
+      // Get today's date and time
+      var now = new Date().getTime();
+      // Find the distance between now and the count down date
+      var distance = countDownDate - now;
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      // Display the result in the element with id="demo"
+      document.getElementById("timer").innerHTML = "Time remaining : " + minutes + "m " + seconds + "s ";
+
+      // If the count down is finished, write some text
+      if (distance < 0) {
+        //Stop the timer
+        clearInterval(x);
+        document.getElementById("timer").innerHTML = "Your time is up!";
+      }
+    }, 500);
+  };
+
+  $scope.startTimer();
+  
   $http({
     method: 'GET',
     url: api + '/bigFiveQuestions'
@@ -107,7 +137,7 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
   $scope.startTimer = function() {
     // Set the date we're counting down to
     var dt = new Date();
-    dt.setMinutes(dt.getMinutes() + 60);
+    dt.setMinutes(dt.getMinutes() + 50);
     var countDownDate = dt;
 
     // Update the count down every 1 second
@@ -273,6 +303,7 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
         $("input[type=radio]").attr('disabled', false);
         $("input[type=range]").attr('disabled', false);
         $("input[type=textarea]").attr('disabled', false);
+        window.scrollTo(0, 0);
 
       }, function(error) {
         console.log("Error occured when loading the chart");
@@ -414,6 +445,7 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
         $("#outputInitialOpinion").css("color", "red");
 
         $scope.currentQIndex += 1;
+        window.scrollTo(0, 0);
 
       }, function(error) {
         console.log("Error occured when loading the question");
