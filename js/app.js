@@ -19,14 +19,14 @@ app.controller('HomeController', function($scope, $http, $window, $timeout) {
   $scope.user = {};
   $scope.user.questionSet = "1"; // This will be hardcoded based on the question set
 
-  $scope.display = function(){
+  $scope.display = function() {
     $window.sessionStorage.setItem('consentTime', Date.now());
     $(".landing-page").css("display", "none");
     $("#demographics").css("display", "block");
   };
 
   $('.gender-radio-button').change(function() {
-    if (this.id == "gender-specified"){
+    if (this.id == "gender-specified") {
       $('#gender-text').prop('disabled', false);
       $('#gender-text').prop('required', true);
     } else {
@@ -37,7 +37,7 @@ app.controller('HomeController', function($scope, $http, $window, $timeout) {
   });
 
   $('.edu-radio-button').change(function() {
-    if (this.id == "education-specified"){
+    if (this.id == "education-specified") {
       $('#education-text').prop('disabled', false);
       $('#education-text').prop('required', true);
     } else {
@@ -48,7 +48,7 @@ app.controller('HomeController', function($scope, $http, $window, $timeout) {
   });
 
   $scope.indexNext = function(user) {
-    if (user.gender && user.age && user.age >=18 && user.education && user.socialmedia && (user.gender == "gender-specified" ? user.genderSpecified : true) && (user.education == "education-specified" ? user.educationSpecified : true)) {
+    if (user.gender && user.age && user.age >= 18 && user.education && user.socialmedia && (user.gender == "gender-specified" ? user.genderSpecified : true) && (user.education == "education-specified" ? user.educationSpecified : true)) {
 
       $("#index-next").attr('disabled', true);
       $(".input-text").attr('disabled', true);
@@ -65,7 +65,7 @@ app.controller('HomeController', function($scope, $http, $window, $timeout) {
       $("#index-instructions").css("display", "block");
       $("#index-submit-button").attr('disabled', true);
 
-      $timeout( function(){
+      $timeout(function() {
         $("#index-submit-button").css("background-color", "#117A65");
         $("#index-submit-button").attr('disabled', false);
       }, 10000);
@@ -76,10 +76,10 @@ app.controller('HomeController', function($scope, $http, $window, $timeout) {
     $("#index-submit-button").attr('disabled', true);
 
     //Set up the user object
-    if (user.gender != "gender-specified"){
+    if (user.gender != "gender-specified") {
       delete user.genderSpecified;
     }
-    if (user.education != "education-specified"){
+    if (user.education != "education-specified") {
       delete user.educationSpecified;
     }
 
@@ -97,7 +97,7 @@ app.controller('HomeController', function($scope, $http, $window, $timeout) {
       console.log("Error occured when submitting user details");
     });
 
-};
+  };
 
 });
 
@@ -105,31 +105,31 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
 
 
   $scope.startTimer = function() {
-      // Set the date we're counting down to
-      var dt = new Date();
-      dt.setMinutes(dt.getMinutes() + 60);
-      var countDownDate = dt;
+    // Set the date we're counting down to
+    var dt = new Date();
+    dt.setMinutes(dt.getMinutes() + 60);
+    var countDownDate = dt;
 
-      // Update the count down every 1 second
-      x = setInterval(function() {
-        // Get today's date and time
-        var now = new Date().getTime();
-        // Find the distance between now and the count down date
-        var distance = countDownDate - now;
-        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    // Update the count down every 1 second
+    x = setInterval(function() {
+      // Get today's date and time
+      var now = new Date().getTime();
+      // Find the distance between now and the count down date
+      var distance = countDownDate - now;
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        // Display the result in the element with id="demo"
-        document.getElementById("timer").innerHTML = "Time remaining : " + minutes + "m " + seconds + "s ";
+      // Display the result in the element with id="demo"
+      document.getElementById("timer").innerHTML = "Time remaining : " + minutes + "m " + seconds + "s ";
 
-        // If the count down is finished, write some text
-        if (distance < 0) {
-          //Stop the timer
-          clearInterval(x);
-          document.getElementById("timer").innerHTML = "Your time is up!";
-        }
-      }, 500);
-    };
+      // If the count down is finished, write some text
+      if (distance < 0) {
+        //Stop the timer
+        clearInterval(x);
+        document.getElementById("timer").innerHTML = "Your time is up!";
+      }
+    }, 500);
+  };
 
   $scope.currentQIndex = 0;
 
@@ -139,6 +139,7 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
 
   $scope.question = {};
 
+  $scope.initialFamiliarityChanged = false;
   $scope.initialOpinionChanged = false;
   $scope.initialTextOpinionChanged = false;
   $scope.initialConfChanged = false;
@@ -148,25 +149,29 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
   //Start timer
   $scope.startTimer();
 
-  $(".slider-old-opinion").change(function() {
-    $scope.initialOpinionChanged = true;
-    $("#outputInitialOpinion").css("display", "none");
-    $(".question-confidence").css("display", "block");
+  $(".slider-familiarity").change(function() {
+    $scope.initialFamiliarityChanged = true;
+    $("#outputFamiliarity").css("color", "green");
+    $(".question-radio-opinion").css("display", "block");
   });
 
-  $(".slider-one").change(function() {
-    $scope.initialConfChanged = true;
-    $("#output").css("color", "green");
+  $(".slider-old-opinion").change(function() {
+    $scope.initialOpinionChanged = true;
+    $("#outputInitialOpinion").css("color", "green");
     $(".question-opinion").css("display", "block");
   });
 
   $(".question-opinion").change(function() {
     $scope.initialTextOpinionChanged = true;
     if ($.trim($('.opinion-textarea').val()) != "") {
-      $("#submit-button").css("display", "block");
-    } else {
-      $("#submit-button").css("display", "none");
+      $(".question-confidence").css("display", "block");
     }
+  });
+
+  $(".slider-one").change(function() {
+    $scope.initialConfChanged = true;
+    $("#output").css("color", "green");
+    $("#submit-button").css("display", "block");
   });
 
   //Confirmation message before reload and back
@@ -199,12 +204,13 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
   $scope.myAnswer = {};
   $scope.myAnswer.initialOpinion = 0;
   $scope.myAnswer.initialConfidence = 50;
+  $scope.myAnswer.initialFamiliarity = 50;
   $scope.myAnswer.userId = $scope.userId;
   $scope.myAnswer.questionSet = $scope.questionSet;
 
   $scope.submitAnswer = function() {
 
-    if ($scope.initialOpinionChanged && $scope.initialConfChanged && $scope.initialTextOpinionChanged) {
+    if ($scope.initialOpinionChanged && $scope.initialConfChanged && $scope.initialTextOpinionChanged && $scope.initialFamiliarityChanged) {
       //Remove the button
       $("#submit-button").css("display", "none");
       //Disbling the input
@@ -282,20 +288,20 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
   $(".slider-new-opinion").change(function() {
     $scope.newOpinionChanged = true;
     $("#outputNewOpinion").css("display", "none");
-    $(".change-confidence").css("display", "block");
-  });
-
-  $(".slider-two").change(function() {
-    $scope.newConfChanged = true;
-    $("#outputTwo").css("color", "green");
     $(".change-opinion").css("display", "block");
   });
 
   $(".change-opinion").change(function() {
     $scope.newTextOpinionChanged = true;
     if ($.trim($('.new-opinion-textarea').val()) != "") {
-      $(".responses").css("display", "block");
+      $(".change-confidence").css("display", "block");
     }
+  });
+
+  $(".slider-two").change(function() {
+    $scope.newConfChanged = true;
+    $("#outputTwo").css("color", "green");
+    $(".responses").css("display", "block");
   });
 
   $(".slider-like").change(function() {
@@ -346,7 +352,7 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
     }
   };
 
-  $scope.next = function(){
+  $scope.next = function() {
 
     $scope.myAnswer = {};
 
@@ -377,6 +383,7 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
         //Display the new question area
         $(".question-area").css("display", "block");
         $(".image-area").css("display", "block");
+        $(".question-radio-opinion").css("display", "none");
         $(".question-confidence").css("display", "none");
         $(".question-opinion").css("display", "none");
 
@@ -389,16 +396,22 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
         $scope.myAnswer = {};
         $scope.myAnswer.initialOpinion = 0;
         $scope.myAnswer.initialConfidence = 50;
+        $scope.myAnswer.initialFamiliarity = 50;
 
         $scope.initialOpinionChanged = false;
         $scope.initialTextOpinionChanged = false;
         $scope.initialConfChanged = false;
+        $scope.initialFamiliarityChanged = false;
 
         $scope.question = response.data;
 
         $("#submit-button").prop("disabled", false);
         $("#output").val("Not Specified");
         $("#output").css("color", "red");
+        $("#outputFamiliarity").val("Not Specified");
+        $("#outputFamiliarity").css("color", "red");
+        $("#outputInitialOpinion").val("Not Specified");
+        $("#outputInitialOpinion").css("color", "red");
 
         $scope.currentQIndex += 1;
 
