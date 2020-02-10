@@ -32,7 +32,7 @@ app.controller('BigFiveController', function($scope, $http, $window) {
   };
 
   $scope.startTimer();
-  
+
   $http({
     method: 'GET',
     url: api + '/bigFiveQuestions'
@@ -188,13 +188,18 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
   $(".slider-old-opinion").change(function() {
     $scope.initialOpinionChanged = true;
     $("#outputInitialOpinion").css("color", "green");
-    $(".question-opinion").css("display", "block");
+    if($scope.myAnswer.initialOpinion != 0){
+      $(".question-opinion").css("display", "block");
+    } else {
+      $(".question-opinion").css("display", "none");
+    }
   });
 
   $(".question-opinion").change(function() {
     $scope.initialTextOpinionChanged = true;
     if ($.trim($('.opinion-textarea').val()) != "") {
       $(".question-confidence").css("display", "block");
+      $(document).scrollTop($(document).height());
     }
   });
 
@@ -202,6 +207,7 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
     $scope.initialConfChanged = true;
     $("#output").css("color", "green");
     $("#submit-button").css("display", "block");
+    $(document).scrollTop($(document).height());
   });
 
   //Confirmation message before reload and back
@@ -285,6 +291,8 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
 
         $("#outputTwo").val("Not Specified");
         $("#outputTwo").css("color", "red");
+        $("#outputNewOpinion").val("Not Specified");
+        $("#outputNewOpinion").css("color", "red");
         $("#outputLike").val("Not Specified");
         $("#outputLike").css("color", "red");
         $("#outputComment").val("Not Specified");
@@ -318,14 +326,19 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
 
   $(".slider-new-opinion").change(function() {
     $scope.newOpinionChanged = true;
-    $("#outputNewOpinion").css("display", "none");
-    $(".change-opinion").css("display", "block");
+    $("#outputNewOpinion").css("color", "green");
+    if ($scope.newAnswer.newOpinion != 0){
+      $(".change-opinion").css("display", "block");
+    } else {
+      $(".change-opinion").css("display", "none");
+    }
   });
 
   $(".change-opinion").change(function() {
     $scope.newTextOpinionChanged = true;
     if ($.trim($('.new-opinion-textarea').val()) != "") {
       $(".change-confidence").css("display", "block");
+      $(document).scrollTop($(document).height());
     }
   });
 
@@ -333,6 +346,7 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
     $scope.newConfChanged = true;
     $("#outputTwo").css("color", "green");
     $(".responses").css("display", "block");
+    $(document).scrollTop($(document).height());
   });
 
   $(".slider-like").change(function() {
@@ -354,6 +368,7 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
     $scope.sliderReportChanged = true;
     $("#outputReport").css("color", "green");
     $("#next-button").css("display", "block");
+    $(document).scrollTop($(document).height());
   });
 
   $scope.update = function() {

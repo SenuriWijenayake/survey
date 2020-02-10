@@ -66,6 +66,25 @@
           </div>
         </div>
 
+        <!-- <div class="col-sm-12 question-radio-opinion" style="display: none;margin-top: 25px;">
+          <label class="question-labels">2) Indicate your attitude on the <b>veracity</b> of this news article. </label>
+          <div class="binary-opinion col-sm-12">
+            <label class="col-sm-2" style="text-align:center;">
+              Critical (-). <br/>
+              News article is fake.
+            </label>
+            <div class="slidecontainer-new col-sm-9" style="width:510px;">
+              <input type="range" ng-model="myAnswer.initialOpinion" min="-50" max="50" value="0" step="1" id="rangeInitialOpinion" oninput="outputInitialOpinion.value = rangeInitialOpinion.value * 2" class="slider-old-opinion">
+              <div class="outputcontainer">
+                <output id="outputInitialOpinion" for="rangeInitialOpinion" class="not-selected-label">Not Selected</label>
+              </div>
+            </div>
+            <label class="col-sm-2" style="padding-right: 0px;text-align:center;">
+              Supportive (+).
+              News article is real.</label>
+          </div>
+        </div> -->
+
         <div class="col-sm-12 question-opinion" style="margin-top: 25px;display:none;">
           <label class="question-labels">3) If you were to comment on this post, what would be <b>your comment</b>?</label>
           <div class="opinion-box">
@@ -126,14 +145,14 @@
         <div class="col-sm-12 change-radio-opinion" style="margin-top: 25px;display:none;">
           <label class="question-labels">2) After reading the comments if you were to comment on this post, would your comment be <b>mostly supportive</b> or <b>mostly critical</b> of the post?</label>
           <div class="binary-opinion col-sm-12">
-            <label class="col-sm-2">Mostly Supportive</label>
+            <label class="col-sm-2">Mostly Critical (-)</label>
             <div class="slidecontainer-new col-sm-10" style="width:510px;">
-              <input type="range" ng-model="newAnswer.newOpinion" min="-50" max="50" value="0" step="1" id="rangeNewOpinion" class="slider-new-opinion">
+              <input type="range" ng-model="newAnswer.newOpinion" min="-50" max="50" value="0" step="1" id="rangeNewOpinion" oninput="outputNewOpinion.value = rangeNewOpinion.value * 2" class="slider-new-opinion">
               <div class="outputcontainer">
-                <label id="outputNewOpinion" class="not-selected-label">Not Selected</label>
+                <output id="outputNewOpinion" for="rangeNewOpinion" class="not-selected-label">Not Selected</label>
               </div>
             </div>
-            <label class="col-sm-1">Mostly Critical</label>
+            <label class="col-sm-2" style="padding-right: 0px;">Mostly Supportive (+)</label>
           </div>
         </div>
 
