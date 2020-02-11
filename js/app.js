@@ -173,6 +173,7 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
   $scope.initialOpinionChanged = false;
   $scope.initialTextOpinionChanged = false;
   $scope.initialConfChanged = false;
+
   $scope.onbeforeunloadEnabled = true;
   $scope.question = {};
 
@@ -189,26 +190,27 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
     $scope.initialOpinionChanged = true;
     $("#outputInitialOpinion").css("color", "green");
     if($scope.myAnswer.initialOpinion != 0){
-      $(".question-opinion").css("display", "block");
-    } else {
-      $(".question-opinion").css("display", "none");
-    }
-  });
-
-  $(".question-opinion").change(function() {
-    $scope.initialTextOpinionChanged = true;
-    if ($.trim($('.opinion-textarea').val()) != "") {
       $(".question-confidence").css("display", "block");
-      $(document).scrollTop($(document).height());
+    } else {
+      $(".question-confidence").css("display", "none");
     }
   });
 
   $(".slider-one").change(function() {
     $scope.initialConfChanged = true;
     $("#output").css("color", "green");
-    $("#submit-button").css("display", "block");
+    $(".question-opinion").css("display", "block");
     $(document).scrollTop($(document).height());
   });
+
+  $(".opinion-textarea").keypress(function() {
+    $scope.initialTextOpinionChanged = true;
+    if ($.trim($('.opinion-textarea').val()) != "") {
+      $("#submit-button").css("display", "block");
+      $(document).scrollTop($(document).height());
+    }
+  });
+
 
   //Confirmation message before reload and back
   $window.onbeforeunload = function(e) {
@@ -328,26 +330,27 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
     $scope.newOpinionChanged = true;
     $("#outputNewOpinion").css("color", "green");
     if ($scope.newAnswer.newOpinion != 0){
-      $(".change-opinion").css("display", "block");
-    } else {
-      $(".change-opinion").css("display", "none");
-    }
-  });
-
-  $(".change-opinion").change(function() {
-    $scope.newTextOpinionChanged = true;
-    if ($.trim($('.new-opinion-textarea').val()) != "") {
       $(".change-confidence").css("display", "block");
-      $(document).scrollTop($(document).height());
+    } else {
+      $(".change-confidence").css("display", "none");
     }
   });
 
   $(".slider-two").change(function() {
     $scope.newConfChanged = true;
     $("#outputTwo").css("color", "green");
-    $(".responses").css("display", "block");
+    $(".change-opinion").css("display", "block");
     $(document).scrollTop($(document).height());
   });
+
+  $(".new-opinion-textarea").keypress(function() {
+    $scope.newTextOpinionChanged = true;
+    if ($.trim($('.new-opinion-textarea').val()) != "") {
+      $(".responses").css("display", "block");
+      $(document).scrollTop($(document).height());
+    }
+  });
+
 
   $(".slider-like").change(function() {
     $scope.sliderLikeChanged = true;

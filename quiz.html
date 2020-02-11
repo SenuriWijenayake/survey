@@ -52,7 +52,7 @@
           </div>
         </div>
 
-        <div class="col-sm-12 question-radio-opinion" style="display: none;margin-top: 25px;">
+        <!-- <div class="col-sm-12 question-radio-opinion" style="display: none;margin-top: 25px;">
           <label class="question-labels">2) If you were to comment on this post, would your comment be <b>mostly supportive</b> or <b>mostly critical</b> of the post?</label>
           <div class="binary-opinion col-sm-12">
             <label class="col-sm-2">Mostly Critical (-)</label>
@@ -64,10 +64,10 @@
             </div>
             <label class="col-sm-2" style="padding-right: 0px;">Mostly Supportive (+)</label>
           </div>
-        </div>
+        </div> -->
 
-        <!-- <div class="col-sm-12 question-radio-opinion" style="display: none;margin-top: 25px;">
-          <label class="question-labels">2) Indicate your attitude on the <b>veracity</b> of this news article. </label>
+        <div class="col-sm-12 question-radio-opinion" style="display: none;margin-top: 25px;">
+          <label class="question-labels">2) How would you rate the <b>trustworthiness</b> of this post? </label>
           <div class="binary-opinion col-sm-12">
             <label class="col-sm-2" style="text-align:center;">
               Critical (-). <br/>
@@ -83,24 +83,24 @@
               Supportive (+).
               News article is real.</label>
           </div>
-        </div> -->
-
-        <div class="col-sm-12 question-opinion" style="margin-top: 25px;display:none;">
-          <label class="question-labels">3) If you were to comment on this post, what would be <b>your comment</b>?</label>
-          <div class="opinion-box">
-            <textarea ng-model="myAnswer.initialTextOpinion" class="opinion-textarea"></textarea>
-          </div>
         </div>
 
         <div class="col-sm-12 question-confidence" style="display:none;margin-top: 25px;">
           <div>
-            <p class="question-labels">4) How <b>confident</b> are you of the comment provided? Move the slider to denote a value. Higher values denote higher confidence.</p>
+            <p class="question-labels">3) How <b>confident</b> are you of the <b>trustworthiness rating</b> provided? Move the slider to denote a value. Higher values denote higher confidence.</p>
           </div>
           <div class="slidecontainer" style="width:510px;">
             <input type="range" ng-model="myAnswer.initialConfidence" min="0" max="100" value="50" step="1" id="rangeInputOne" oninput="output.value = rangeInputOne.value" class="slider-one">
           </div>
           <div class="outputcontainer">
             <output id="output" for="rangeInputOne">Not Selected</output>
+          </div>
+        </div>
+
+        <div class="col-sm-12 question-opinion" style="margin-top: 25px;display:none;">
+          <label class="question-labels">4) If you were to comment on this post, what would be <b>your comment</b>?</label>
+          <div class="opinion-box">
+            <textarea ng-model="myAnswer.initialTextOpinion" class="opinion-textarea"></textarea>
           </div>
         </div>
 
@@ -125,15 +125,15 @@
         <div><label class="col-sm-12 question-labels">Now, carefully read the comments appearing on the post and answer the following questions.</label></div>
 
         <div class="col-sm-12 manipulation-radio-opinion">
-          <label class="question-labels">1) Would you say the displayed user comments are mostly supportive or critical of the post?</label>
+          <label class="question-labels">1) Would you say the displayed user comments are mostly supportive or critical of the post's trustworthiness?</label>
           <div class="opinion-radio">
             <div class="row">
               <input style="margin-left: 40px;" id="manipulationSupportive" type="radio" name="newAnswer.manipulationRadioOpinion" ng-model="newAnswer.manipulationRadioOpinion" value="supportive" class="opinion-radio-button"> <label for="manipulationSupportive"
-                class="radio-labels">Most comments are supportive of the post.</label>
+                class="radio-labels">Most comments are supportive of the post's trustworthiness.</label>
             </div>
             <div class="row">
               <input style="margin-left: 40px;" id="manipulationCritical" type="radio" name="newAnswer.manipulationRadioOpinion" ng-model="newAnswer.manipulationRadioOpinion" value="critical" class="opinion-radio-button"> <label for="manipulationCritical"
-                class="radio-labels">Most comments are critical of the post.</label>
+                class="radio-labels">Most comments are critical of the post's trustworthiness.</label>
             </div>
             <div class="row">
               <input style="margin-left: 40px;" id="manipulationNeutral" type="radio" name="newAnswer.manipulationRadioOpinion" ng-model="newAnswer.manipulationRadioOpinion" value="neutral" class="opinion-radio-button"> <label for="manipulationNeutral"
@@ -142,7 +142,7 @@
           </div>
         </div>
 
-        <div class="col-sm-12 change-radio-opinion" style="margin-top: 25px;display:none;">
+        <!-- <div class="col-sm-12 change-radio-opinion" style="margin-top: 25px;display:none;">
           <label class="question-labels">2) After reading the comments if you were to comment on this post, would your comment be <b>mostly supportive</b> or <b>mostly critical</b> of the post?</label>
           <div class="binary-opinion col-sm-12">
             <label class="col-sm-2">Mostly Critical (-)</label>
@@ -154,24 +154,44 @@
             </div>
             <label class="col-sm-2" style="padding-right: 0px;">Mostly Supportive (+)</label>
           </div>
-        </div>
+        </div> -->
 
-        <div class="col-sm-12 change-opinion" style="margin-top: 25px;display:none;">
-          <label class="question-labels">3) After reading the comments if you were to comment on this post, what would be <b>your comment</b>?</label>
-          <div class="opinion-box">
-            <textarea ng-model="newAnswer.newTextOpinion" class="new-opinion-textarea"></textarea>
+
+        <div class="col-sm-12 change-radio-opinion" style="margin-top: 25px;display:none;">
+          <label class="question-labels">2) After reading the comments, how would you rate the <b>trustworthiness</b> of this post?</label>
+          <div class="binary-opinion col-sm-12">
+            <label class="col-sm-2" style="text-align:center;">
+              Critical (-). <br/>
+              News article is fake.
+            </label>
+            <div class="slidecontainer-new col-sm-10" style="width:510px;">
+              <input type="range" ng-model="newAnswer.newOpinion" min="-50" max="50" value="0" step="1" id="rangeNewOpinion" oninput="outputNewOpinion.value = rangeNewOpinion.value * 2" class="slider-new-opinion">
+              <div class="outputcontainer">
+                <output id="outputNewOpinion" for="rangeNewOpinion" class="not-selected-label">Not Selected</label>
+              </div>
+            </div>
+            <label class="col-sm-2" style="padding-right: 0px;text-align:center;">
+              Supportive (+).
+              News article is real.</label>
           </div>
         </div>
 
         <div class="col-sm-12 change-confidence" style="display:none;margin-top:25px;">
           <div>
-            <p class="question-labels">4) How <b>confident</b> are you of the new comment provided? Move the slider to denote a value. Higher values denote higher confidence.</p>
+            <p class="question-labels">3) How <b>confident</b> are you of the new <b>trustworthiness rating</b> provided? Move the slider to denote a value. Higher values denote higher confidence.</p>
           </div>
           <div class="slidecontainer" style="width:510px;">
             <input type="range" ng-model="newAnswer.newConfidence" min="0" max="100" value="50" step="1" id="rangeInputTwo" oninput="outputTwo.value = rangeInputTwo.value" class="slider-two">
           </div>
           <div class="outputcontainer">
             <output id="outputTwo" for="rangeInputTwo">Not Selected</output>
+          </div>
+        </div>
+
+        <div class="col-sm-12 change-opinion" style="margin-top: 25px;display:none;">
+          <label class="question-labels">4) After reading the comments if you were to comment on this post, what would be <b>your comment</b>?</label>
+          <div class="opinion-box">
+            <textarea ng-model="newAnswer.newTextOpinion" class="new-opinion-textarea"></textarea>
           </div>
         </div>
 
