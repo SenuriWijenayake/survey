@@ -47,7 +47,7 @@ app.controller('BigFiveController', function($scope, $http, $window) {
 
 app.controller('HomeController', function($scope, $http, $window, $timeout) {
   $scope.user = {};
-  $scope.user.questionSet = "1"; // This will be hardcoded based on the question set
+  $scope.user.questionSet = "2"; // This will be hardcoded based on the question set
 
   $scope.display = function() {
     $window.sessionStorage.setItem('consentTime', Date.now());
@@ -410,7 +410,7 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
     $("input[type=textarea]").attr('disabled', false);
 
     //Handling the ending of the quiz and directing to the big five questionnaire
-    if ($scope.currentQIndex == 5) {
+    if ($scope.currentQIndex == 2) {
       //Disable the confirmation message
       $scope.onbeforeunloadEnabled = false;
       $window.location.href = './big-five.html';
