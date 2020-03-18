@@ -104,6 +104,7 @@ app.controller('HomeController', function($scope, $http, $window, $timeout) {
 
   $scope.submitDetails = function(user) {
     $("#index-submit-button").attr('disabled', true);
+    $("#index-loader").css("display", "block");
 
     //Set up the user object
     if (user.gender != "gender-specified") {

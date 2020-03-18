@@ -473,8 +473,8 @@ input[type=radio]+label>img {
 
 .index-submit {
   margin-top: 18px;
-  /* float: right; */
-  width: 20%;
+  float: right;
+  width: 30%;
   height: 43px;
   /* background-color: #117A65; */
   background-color: grey;
