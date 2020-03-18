@@ -431,11 +431,11 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
       }).then(function(response) {
 
         //Display the new question area
-        $(".question-area").css("display", "block");
         $(".image-area").css("display", "block");
         $(".question-radio-opinion").css("display", "none");
         $(".question-confidence").css("display", "none");
         $(".question-opinion").css("display", "none");
+        $(".question-area").css("display", "block");
 
         $(".change-radio-opinion").css("display", "none");
         $(".change-confidence").css("display", "none");
