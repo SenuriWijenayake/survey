@@ -252,14 +252,15 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
   $scope.submitAnswer = function() {
 
     if ($scope.initialOpinionChanged && $scope.initialConfChanged && $scope.initialFamiliarityChanged) {
-      //Remove the button
-      $("#submit-button").css("display", "none");
+      //Diable the button and show loader
+      $("#submit-button").attr('disabled', true);
+      $("#submit-button").css('background-color', 'grey');
+      $("#loader-one").css("display", "block");
+
       //Disbling the input
       $("input[type=radio]").attr('disabled', true);
       $("input[type=range]").attr('disabled', true);
       $("input[type=textarea]").attr('disabled', true);
-      //Loader activated
-      $("#index-loader").css("display", "block");
 
       $scope.myAnswer.questionId = $scope.question.questionNumber;
       $scope.myAnswer.userId = $scope.userId;
@@ -273,8 +274,6 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
         data: $scope.myAnswer,
         type: JSON,
       }).then(function(response) {
-        //Loader removed
-        $("#index-loader").css("display", "none");
 
         $scope.newAnswer = {};
         $scope.newAnswer.newOpinion = 0;
@@ -384,9 +383,15 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
     if ($scope.manipulationChanged && $scope.newOpinionChanged && $scope.newConfChanged && $scope.sliderLikeChanged &&
       $scope.sliderCommChanged && $scope.sliderShareChanged && $scope.sliderReportChanged) {
 
-      //Remove the question area and chart area
-      $(".change-area").css("display", "none");
-      $(".image-area-two").css("display", "none");
+      //Diable the button and show loader
+      $("#next-button").attr('disabled', true);
+      $("#next-button").css('background-color', 'grey');
+      $("#loader-two").css("display", "block");
+
+      //Disbling the input
+      $("input[type=radio]").attr('disabled', true);
+      $("input[type=range]").attr('disabled', true);
+      $("input[type=textarea]").attr('disabled', true);
 
       $scope.newAnswer.questionId = $scope.question.questionNumber;
       $scope.newAnswer.userId = $scope.userId;
@@ -409,6 +414,15 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
   $scope.next = function() {
 
     $scope.myAnswer = {};
+
+    //Remove the question area and chart area
+    $(".change-area").css("display", "none");
+    $(".image-area-two").css("display", "none");
+    //Reset the button and loader
+    $("#next-button").attr('disabled', false);
+    $("#next-button").css('background-color', '#117A65');
+    $("#next-button").css('display', 'none');
+    $("#loader-two").css("display", "none");
 
     $("input[type=radio]").attr('disabled', false);
     $("input[type=range]").attr('disabled', false);
@@ -439,6 +453,12 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
         $(".question-radio-opinion").css("display", "none");
         $(".question-confidence").css("display", "none");
         $(".question-opinion").css("display", "none");
+
+        //Reset the loader and button
+        $("#submit-button").attr('disabled', false);
+        $("#submit-button").css('background-color', '#117A65');
+        $("#submit-button").css('display', 'none');
+        $("#loader-one").css("display", "none");
         $(".question-area").css("display", "block");
 
         $(".change-radio-opinion").css("display", "none");
@@ -459,7 +479,6 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
 
         $scope.question = response.data;
 
-        $("#submit-button").prop("disabled", false);
         $("#output").val("Not Specified");
         $("#output").css("color", "red");
         $("#outputFamiliarity").val("Not Specified");
