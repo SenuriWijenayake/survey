@@ -31,7 +31,7 @@ app.controller('BigFiveController', function($scope, $http, $window) {
     }, 500);
   };
 
-  $scope.startTimer();
+  // $scope.startTimer();
 
   $http({
     method: 'GET',
@@ -179,7 +179,7 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
   $scope.question = {};
 
   //Start timer
-  $scope.startTimer();
+  // $scope.startTimer();
 
   $(".slider-familiarity").change(function() {
     $scope.initialFamiliarityChanged = true;

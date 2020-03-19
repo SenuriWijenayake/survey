@@ -23,8 +23,8 @@
     <!-- warning message-->
     <div class="row">
       <div class="col-sm-12">
-        <label class="col-sm-9 quiz-warning">Do NOT refresh, go back/forward using browser controls during the survey.</label>
-        <span class="col-sm-3 timer" id="timer"></span>
+        <label class="col-sm-12 quiz-warning">Do NOT refresh, go back/forward using browser controls during the survey.</label>
+        <!-- <span class="col-sm-3 timer" id="timer"></span> -->
       </div>
     </div>
 
@@ -44,10 +44,19 @@
           <div>
             <p class="question-labels">1) How <b>familiar</b> are you with this news article? Move the slider to denote a value. Higher values denote higher familiarity.</p>
           </div>
-          <div class="slidecontainer" style="width:510px;">
-            <input type="range" ng-model="myAnswer.initialFamiliarity" min="0" max="100" value="50" step="1" id="rangeInputFamiliarity" oninput="outputFamiliarity.value = rangeInputFamiliarity.value" class="slider-familiarity">
+
+          <div class="col-sm-12">
+            <label class="col-sm-2" style="text-align:center;">
+              Low Familiarity
+            </label>
+            <div class="slidecontainer col-sm-9" style="width:510px;padding:0px;margin-left:-1%;">
+              <input type="range" ng-model="myAnswer.initialFamiliarity" min="0" max="100" value="50" step="1" id="rangeInputFamiliarity" oninput="outputFamiliarity.value = rangeInputFamiliarity.value" class="slider-familiarity">
+            </div>
+            <label class="col-sm-1" style="padding-right:0px;text-align:center;">
+              High Familiarity
+            </label>
           </div>
-          <div class="outputcontainer">
+          <div class="outputcontainer col-sm-12" style="width:100%;">
             <output id="outputFamiliarity" for="rangeInputFamiliarity">Not Selected</output>
           </div>
         </div>
@@ -70,7 +79,7 @@
           <label class="question-labels">2) How would you rate the <b>trustworthiness</b> of this post? </label>
           <div class="binary-opinion col-sm-12">
             <label class="col-sm-2" style="text-align:center;">
-              Critical (-). <br/>
+              Critical (-) <br/>
               News article is fake.
             </label>
             <div class="slidecontainer-new col-sm-9" style="width:510px;">
@@ -80,7 +89,7 @@
               </div>
             </div>
             <label class="col-sm-2" style="padding-right: 0px;text-align:center;">
-              Supportive (+).
+              Supportive (+)
               News article is real.</label>
           </div>
         </div>
@@ -89,10 +98,18 @@
           <div>
             <p class="question-labels">3) How <b>confident</b> are you of the <b>trustworthiness rating</b> provided? Move the slider to denote a value. Higher values denote higher confidence.</p>
           </div>
-          <div class="slidecontainer" style="width:510px;">
-            <input type="range" ng-model="myAnswer.initialConfidence" min="0" max="100" value="50" step="1" id="rangeInputOne" oninput="output.value = rangeInputOne.value" class="slider-one">
+          <div class="col-sm-12">
+            <label class="col-sm-2" style="text-align:center;">
+              Low Confidence
+            </label>
+            <div class="slidecontainer col-sm-9" style="width:510px; padding:0px;margin-left:-1%;">
+              <input type="range" ng-model="myAnswer.initialConfidence" min="0" max="100" value="50" step="1" id="rangeInputOne" oninput="output.value = rangeInputOne.value" class="slider-one">
+            </div>
+            <label class="col-sm-1" style="text-align:center;padding-right:0px;">
+              High Confidence
+            </label>
           </div>
-          <div class="outputcontainer">
+          <div class="outputcontainer col-sm-12" style="width:100%;">
             <output id="output" for="rangeInputOne">Not Selected</output>
           </div>
         </div>
@@ -161,7 +178,7 @@
           <label class="question-labels">2) After reading the comments, how would you rate the <b>trustworthiness</b> of this post?</label>
           <div class="binary-opinion col-sm-12">
             <label class="col-sm-2" style="text-align:center;">
-              Critical (-). <br/>
+              Critical (-) <br/>
               News article is fake.
             </label>
             <div class="slidecontainer-new col-sm-10" style="width:510px;">
@@ -171,7 +188,7 @@
               </div>
             </div>
             <label class="col-sm-2" style="padding-right: 0px;text-align:center;">
-              Supportive (+).
+              Supportive (+)
               News article is real.</label>
           </div>
         </div>
@@ -180,10 +197,19 @@
           <div>
             <p class="question-labels">3) How <b>confident</b> are you of the new <b>trustworthiness rating</b> provided? Move the slider to denote a value. Higher values denote higher confidence.</p>
           </div>
-          <div class="slidecontainer" style="width:510px;">
-            <input type="range" ng-model="newAnswer.newConfidence" min="0" max="100" value="50" step="1" id="rangeInputTwo" oninput="outputTwo.value = rangeInputTwo.value" class="slider-two">
+
+          <div class="col-sm-12">
+            <label class="col-sm-2" style="text-align:center;">
+              Low Confidence
+            </label>
+            <div class="slidecontainer col-sm-9" style="width:510px;padding:0px;margin-left:-1%;">
+              <input type="range" ng-model="newAnswer.newConfidence" min="0" max="100" value="50" step="1" id="rangeInputTwo" oninput="outputTwo.value = rangeInputTwo.value" class="slider-two">
+            </div>
+            <label class="col-sm-1" style="text-align:center;padding-right:0px;">
+              High Confidence
+            </label>
           </div>
-          <div class="outputcontainer">
+          <div class="outputcontainer col-sm-12" style="width:100%;">
             <output id="outputTwo" for="rangeInputTwo">Not Selected</output>
           </div>
         </div>
