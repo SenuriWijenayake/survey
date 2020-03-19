@@ -1,6 +1,6 @@
 var app = angular.module('app', []);
-var api = 'https://blooming-woodland-81741.herokuapp.com';
-// var api = 'http://localhost:5000';
+// var api = 'https://blooming-woodland-81741.herokuapp.com';
+var api = 'http://localhost:5000';
 
 app.controller('BigFiveController', function($scope, $http, $window) {
 
@@ -172,7 +172,7 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
 
   $scope.initialFamiliarityChanged = false;
   $scope.initialOpinionChanged = false;
-  $scope.initialTextOpinionChanged = false;
+  // $scope.initialTextOpinionChanged = false;
   $scope.initialConfChanged = false;
 
   $scope.onbeforeunloadEnabled = true;
@@ -200,17 +200,19 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
   $(".slider-one").change(function() {
     $scope.initialConfChanged = true;
     $("#output").css("color", "green");
-    $(".question-opinion").css("display", "block");
+    $("#submit-button").css("display", "block");
     $(document).scrollTop($(document).height());
+    // $(".question-opinion").css("display", "block");
+    // $(document).scrollTop($(document).height());
   });
 
-  $(".opinion-textarea").keypress(function() {
-    $scope.initialTextOpinionChanged = true;
-    if ($.trim($('.opinion-textarea').val()) != "") {
-      $("#submit-button").css("display", "block");
-      $(document).scrollTop($(document).height());
-    }
-  });
+  // $(".opinion-textarea").keypress(function() {
+  //   $scope.initialTextOpinionChanged = true;
+  //   if ($.trim($('.opinion-textarea').val()) != "") {
+  //     $("#submit-button").css("display", "block");
+  //     $(document).scrollTop($(document).height());
+  //   }
+  // });
 
 
   //Confirmation message before reload and back
@@ -249,7 +251,7 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
 
   $scope.submitAnswer = function() {
 
-    if ($scope.initialOpinionChanged && $scope.initialConfChanged && $scope.initialTextOpinionChanged && $scope.initialFamiliarityChanged) {
+    if ($scope.initialOpinionChanged && $scope.initialConfChanged && $scope.initialFamiliarityChanged) {
       //Remove the button
       $("#submit-button").css("display", "none");
       //Disbling the input
@@ -284,7 +286,7 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
 
         $scope.manipulationChanged = false;
         $scope.newOpinionChanged = false;
-        $scope.newTextOpinionChanged = false;
+        // $scope.newTextOpinionChanged = false;
         $scope.newConfChanged = false;
 
         $scope.sliderLikeChanged = false;
@@ -340,17 +342,19 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
   $(".slider-two").change(function() {
     $scope.newConfChanged = true;
     $("#outputTwo").css("color", "green");
-    $(".change-opinion").css("display", "block");
+    $(".responses").css("display", "block");
     $(document).scrollTop($(document).height());
+    // $(".change-opinion").css("display", "block");
+    // $(document).scrollTop($(document).height());
   });
-
-  $(".new-opinion-textarea").keypress(function() {
-    $scope.newTextOpinionChanged = true;
-    if ($.trim($('.new-opinion-textarea').val()) != "") {
-      $(".responses").css("display", "block");
-      $(document).scrollTop($(document).height());
-    }
-  });
+  //
+  // $(".new-opinion-textarea").keypress(function() {
+  //   $scope.newTextOpinionChanged = true;
+  //   if ($.trim($('.new-opinion-textarea').val()) != "") {
+  //     $(".responses").css("display", "block");
+  //     $(document).scrollTop($(document).height());
+  //   }
+  // });
 
 
   $(".slider-like").change(function() {
@@ -377,7 +381,7 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
 
   $scope.update = function() {
 
-    if ($scope.manipulationChanged && $scope.newOpinionChanged && $scope.newConfChanged && $scope.newTextOpinionChanged && $scope.sliderLikeChanged &&
+    if ($scope.manipulationChanged && $scope.newOpinionChanged && $scope.newConfChanged && $scope.sliderLikeChanged &&
       $scope.sliderCommChanged && $scope.sliderShareChanged && $scope.sliderReportChanged) {
 
       //Remove the question area and chart area
@@ -449,7 +453,7 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
         $scope.myAnswer.initialFamiliarity = 50;
 
         $scope.initialOpinionChanged = false;
-        $scope.initialTextOpinionChanged = false;
+        // $scope.initialTextOpinionChanged = false;
         $scope.initialConfChanged = false;
         $scope.initialFamiliarityChanged = false;
 

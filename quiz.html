@@ -74,7 +74,7 @@
               News article is fake.
             </label>
             <div class="slidecontainer-new col-sm-9" style="width:510px;">
-              <input type="range" ng-model="myAnswer.initialOpinion" min="-50" max="50" value="0" step="1" id="rangeInitialOpinion" oninput="outputInitialOpinion.value = rangeInitialOpinion.value * 2" class="slider-old-opinion">
+              <input type="range" ng-model="myAnswer.initialOpinion" min="-100" max="100" value="0" step="2" id="rangeInitialOpinion" oninput="outputInitialOpinion.value = rangeInitialOpinion.value" class="slider-old-opinion">
               <div class="outputcontainer">
                 <output id="outputInitialOpinion" for="rangeInitialOpinion" class="not-selected-label">Not Selected</label>
               </div>
@@ -97,12 +97,12 @@
           </div>
         </div>
 
-        <div class="col-sm-12 question-opinion" style="margin-top: 25px;display:none;">
+        <!-- <div class="col-sm-12 question-opinion" style="margin-top: 25px;display:none;">
           <label class="question-labels">4) If you are to comment on this post, what would be <b>your comment</b>? (You <b>MUST</b> provide a comment here.)</label>
           <div class="opinion-box">
             <textarea ng-model="myAnswer.initialTextOpinion" class="opinion-textarea"></textarea>
           </div>
-        </div>
+        </div> -->
 
         <div class="row">
           <div class="col-sm-8 button" style="margin-left: -3%;">
@@ -165,7 +165,7 @@
               News article is fake.
             </label>
             <div class="slidecontainer-new col-sm-10" style="width:510px;">
-              <input type="range" ng-model="newAnswer.newOpinion" min="-50" max="50" value="0" step="1" id="rangeNewOpinion" oninput="outputNewOpinion.value = rangeNewOpinion.value * 2" class="slider-new-opinion">
+              <input type="range" ng-model="newAnswer.newOpinion" min="-100" max="100" value="0" step="2" id="rangeNewOpinion" oninput="outputNewOpinion.value = rangeNewOpinion.value" class="slider-new-opinion">
               <div class="outputcontainer">
                 <output id="outputNewOpinion" for="rangeNewOpinion" class="not-selected-label">Not Selected</label>
               </div>
@@ -188,12 +188,12 @@
           </div>
         </div>
 
-        <div class="col-sm-12 change-opinion" style="margin-top: 25px;display:none;">
+        <!-- <div class="col-sm-12 change-opinion" style="margin-top: 25px;display:none;">
           <label class="question-labels">4) After reading the comments if you are to comment on this post, what would be <b>your comment</b>? (You <b>MUST</b> provide a comment here.)</label>
           <div class="opinion-box">
             <textarea ng-model="newAnswer.newTextOpinion" class="new-opinion-textarea"></textarea>
           </div>
-        </div>
+        </div> -->
 
         <div class="col-sm-12 responses" style="display:none;margin-top:20px;">
           <div>
