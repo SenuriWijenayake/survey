@@ -39,6 +39,12 @@
   font-weight: normal;
 }
 
+.question-labels-subs{
+  font-size: 12px;
+  padding: 5px;
+  font-weight: normal;
+}
+
 .opinion-textarea{
   width: 100%;
   height: 80px;

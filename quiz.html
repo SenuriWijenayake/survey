@@ -121,6 +121,77 @@
           </div>
         </div> -->
 
+        <div class="col-sm-12 initial-responses" style="display:none;margin-top:20px;">
+          <div>
+            <p class="question-labels">4) How likely are you to...</p>
+          </div>
+          <div>
+            <div class="col-sm-7" style="text-align:center;"><label style="text-align:center;">Extremely Unlikely</label></div>
+            <div class="col-sm-5" style="text-align:right;"><label style="text-align:center;">Extremely Likely</label></div>
+          </div>
+          <table class="response-table">
+              <td class="col-sm-3" style="padding:0px;"><label class="question-labels">Like this post</label></td>
+              <td class="col-sm-9">
+                <div class="slidecontainer" style="width:510px;">
+                  <input type="range" ng-model="myAnswer.initialLike" min="0" max="100" value="50" step="1" id="rangeInitLike" oninput="outputInitLike.value = rangeInitLike.value" class="slider-like-one">
+                </div>
+                <div class="outputcontainer">
+                  <output id="outputInitLike" for="rangeInitLike" class="special-output">Not Selected</output>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="col-sm-3" style="padding:0px;"><label class="question-labels">Comment on this post</label></td>
+              <td class="col-sm-9">
+                <div class="slidecontainer" style="width:510px;">
+                  <input type="range" ng-model="myAnswer.initialComment" min="0" max="100" value="50" step="1" id="rangeInitComment" oninput="outputInitComment.value = rangeInitComment.value" class="slider-comm-one">
+                </div>
+                <div class="outputcontainer">
+                  <output id="outputInitComment" for="rangeInitComment" class="special-output">Not Selected</output>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="col-sm-3" style="padding:0px;"><label class="question-labels">Search more about this story (fact check)</label></td>
+              <td class="col-sm-9">
+                <div class="slidecontainer" style="width:510px;">
+                  <input type="range" ng-model="myAnswer.initialFactcheck" min="0" max="100" value="50" step="1" id="rangeInitFactcheck" oninput="outputInitFactcheck.value = rangeInitFactcheck.value" class="slider-fact-one">
+                </div>
+                <div class="outputcontainer">
+                  <output id="outputInitFactcheck" for="rangeInitFactcheck" class="special-output">Not Selected</output>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="col-sm-3" style="padding:0px;"><label class="question-labels">Share this post</label></td>
+              <td class="col-sm-9">
+                <div class="slidecontainer" style="width:510px;">
+                  <input type="range" ng-model="myAnswer.initialShare" min="0" max="100" value="50" step="1" id="rangeInitShare" oninput="outputInitShare.value = rangeInitShare.value" class="slider-share-one">
+                </div>
+                <div class="outputcontainer">
+                  <output id="outputInitShare" for="rangeInitShare" class="special-output">Not Selected</output>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="col-sm-3" style="padding:0px;"><label class="question-labels">Report this post</label></td>
+              <td class="col-sm-9">
+                <div class="slidecontainer" style="width:510px;">
+                  <input type="range" ng-model="myAnswer.initialReport" min="0" max="100" value="50" step="1" id="rangeInitReport" oninput="outputInitReport.value = rangeInitReport.value" class="slider-report-one">
+                </div>
+                <div class="outputcontainer">
+                  <output id="outputInitReport" for="rangeInitReport" class="special-output">Not Selected</output>
+                </div>
+              </td>
+            </tr>
+
+          </table>
+        </div>
+
         <div class="row">
           <div class="col-sm-8 button" style="margin-left: -3%;">
             <input id="submit-button" style="display:none;float:right;" class="submit-button" type="submit" ng-click="submitAnswer()" />
@@ -225,6 +296,10 @@
           <div>
             <p class="question-labels">4) After reading the comments, how likely are you to...</p>
           </div>
+          <div>
+            <div class="col-sm-7" style="text-align:center;"><label style="text-align:center;">Extremely Unlikely</label></div>
+            <div class="col-sm-5" style="text-align:right;"><label style="text-align:center;">Extremely Likely</label></div>
+          </div>
           <table class="response-table">
             <tr>
               <td class="col-sm-3" style="padding:0px;"><label class="question-labels">Like this post</label></td>
@@ -287,7 +362,6 @@
             </tr>
 
           </table>
-
         </div>
 
         <div class="row">

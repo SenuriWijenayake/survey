@@ -4,35 +4,6 @@ var api = 'https://blooming-woodland-81741.herokuapp.com';
 
 app.controller('BigFiveController', function($scope, $http, $window) {
 
-  $scope.startTimer = function() {
-    // Set the date we're counting down to
-    var dt = new Date();
-    dt.setMinutes(dt.getMinutes() + 5);
-    var countDownDate = dt;
-
-    // Update the count down every 1 second
-    x = setInterval(function() {
-      // Get today's date and time
-      var now = new Date().getTime();
-      // Find the distance between now and the count down date
-      var distance = countDownDate - now;
-      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      // Display the result in the element with id="demo"
-      document.getElementById("timer").innerHTML = "Time remaining : " + minutes + "m " + seconds + "s ";
-
-      // If the count down is finished, write some text
-      if (distance < 0) {
-        //Stop the timer
-        clearInterval(x);
-        document.getElementById("timer").innerHTML = "Your time is up!";
-      }
-    }, 500);
-  };
-
-  // $scope.startTimer();
-
   $http({
     method: 'GET',
     url: api + '/bigFiveQuestions'
@@ -47,7 +18,7 @@ app.controller('BigFiveController', function($scope, $http, $window) {
 
 app.controller('HomeController', function($scope, $http, $window, $timeout) {
   $scope.user = {};
-  $scope.user.questionSet = "2"; // This will be hardcoded based on the question set
+  $scope.user.questionSet = "1"; // This will be hardcoded based on the question set
 
   $scope.display = function() {
     $window.sessionStorage.setItem('consentTime', Date.now());
@@ -144,8 +115,13 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
 
   $scope.initialFamiliarityChanged = false;
   $scope.initialOpinionChanged = false;
-  // $scope.initialTextOpinionChanged = false;
   $scope.initialConfChanged = false;
+
+  $scope.sliderInitLikeChanged = false;
+  $scope.sliderInitCommChanged = false;
+  $scope.sliderInitShareChanged = false;
+  $scope.sliderInitReportChanged = false;
+  $scope.sliderInitFactChanged = false;
 
   $scope.onbeforeunloadEnabled = true;
   $scope.question = {};
@@ -165,20 +141,36 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
   $(".slider-one").change(function() {
     $scope.initialConfChanged = true;
     $("#output").css("color", "green");
-    $("#submit-button").css("display", "block");
+    $(".initial-responses").css("display", "block");
     $(document).scrollTop($(document).height());
-    // $(".question-opinion").css("display", "block");
-    // $(document).scrollTop($(document).height());
   });
 
-  // $(".opinion-textarea").keypress(function() {
-  //   $scope.initialTextOpinionChanged = true;
-  //   if ($.trim($('.opinion-textarea').val()) != "") {
-  //     $("#submit-button").css("display", "block");
-  //     $(document).scrollTop($(document).height());
-  //   }
-  // });
+  $(".slider-like-one").change(function() {
+    $scope.sliderInitLikeChanged = true;
+    $("#outputInitLike").css("color", "green");
+  });
 
+  $(".slider-comm-one").change(function() {
+    $scope.sliderInitCommChanged = true;
+    $("#outputInitComment").css("color", "green");
+  });
+
+  $(".slider-fact-one").change(function() {
+    $scope.sliderInitFactChanged = true;
+    $("#outputInitFactcheck").css("color", "green");
+  });
+
+  $(".slider-share-one").change(function() {
+    $scope.sliderInitShareChanged = true;
+    $("#outputInitShare").css("color", "green");
+  });
+
+  $(".slider-report-one").change(function() {
+    $scope.sliderInitReportChanged = true;
+    $("#outputInitReport").css("color", "green");
+    $("#submit-button").css("display", "block");
+    $(document).scrollTop($(document).height());
+  });
 
   //Confirmation message before reload and back
   $window.onbeforeunload = function(e) {
@@ -211,12 +203,19 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
   $scope.myAnswer.initialOpinion = 0;
   $scope.myAnswer.initialConfidence = 50;
   $scope.myAnswer.initialFamiliarity = 50;
+
+  $scope.myAnswer.initialLike = 50;
+  $scope.myAnswer.initialComment = 50;
+  $scope.myAnswer.initialShare = 50;
+  $scope.myAnswer.initialReport = 50;
+  $scope.myAnswer.initialFactcheck = 50;
+
   $scope.myAnswer.userId = $scope.userId;
   $scope.myAnswer.questionSet = $scope.questionSet;
 
   $scope.submitAnswer = function() {
 
-    if ($scope.initialOpinionChanged && $scope.initialConfChanged && $scope.initialFamiliarityChanged) {
+    if ($scope.initialOpinionChanged && $scope.initialConfChanged && $scope.initialFamiliarityChanged && $scope.sliderInitLikeChanged && $scope.sliderInitCommChanged && $scope.sliderInitShareChanged && $scope.sliderInitReportChanged && $scope.sliderInitFactChanged) {
       //Diable the button and show loader
       $("#submit-button").attr('disabled', true);
       $("#submit-button").css('background-color', 'grey');
@@ -251,7 +250,6 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
 
         $scope.manipulationChanged = false;
         $scope.newOpinionChanged = false;
-        // $scope.newTextOpinionChanged = false;
         $scope.newConfChanged = false;
 
         $scope.sliderLikeChanged = false;
@@ -308,18 +306,7 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
     $("#outputTwo").css("color", "green");
     $(".responses").css("display", "block");
     $(document).scrollTop($(document).height());
-    // $(".change-opinion").css("display", "block");
-    // $(document).scrollTop($(document).height());
   });
-  //
-  // $(".new-opinion-textarea").keypress(function() {
-  //   $scope.newTextOpinionChanged = true;
-  //   if ($.trim($('.new-opinion-textarea').val()) != "") {
-  //     $(".responses").css("display", "block");
-  //     $(document).scrollTop($(document).height());
-  //   }
-  // });
-
 
   $(".slider-like").change(function() {
     $scope.sliderLikeChanged = true;
@@ -331,6 +318,11 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
     $("#outputComment").css("color", "green");
   });
 
+  $(".slider-fact").change(function() {
+    $scope.sliderFactChanged = true;
+    $("#outputFactcheck").css("color", "green");
+  });
+
   $(".slider-share").change(function() {
     $scope.sliderShareChanged = true;
     $("#outputShare").css("color", "green");
@@ -339,11 +331,6 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
   $(".slider-report").change(function() {
     $scope.sliderReportChanged = true;
     $("#outputReport").css("color", "green");
-  });
-
-  $(".slider-fact").change(function() {
-    $scope.sliderFactChanged = true;
-    $("#outputFactcheck").css("color", "green");
     $("#next-button").css("display", "block");
     $(document).scrollTop($(document).height());
   });
@@ -423,6 +410,7 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
         $(".question-radio-opinion").css("display", "none");
         $(".question-confidence").css("display", "none");
         $(".question-opinion").css("display", "none");
+        $(".initial-responses").css('display', 'none');
 
         //Reset the loader and button
         $("#submit-button").attr('disabled', false);
@@ -442,10 +430,21 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
         $scope.myAnswer.initialConfidence = 50;
         $scope.myAnswer.initialFamiliarity = 50;
 
+        $scope.myAnswer.initialLike = 50;
+        $scope.myAnswer.initialComment = 50;
+        $scope.myAnswer.initialShare = 50;
+        $scope.myAnswer.initialReport = 50;
+        $scope.myAnswer.initialFactcheck = 50;
+
         $scope.initialOpinionChanged = false;
-        // $scope.initialTextOpinionChanged = false;
         $scope.initialConfChanged = false;
         $scope.initialFamiliarityChanged = false;
+
+        $scope.sliderInitLikeChanged = false;
+        $scope.sliderInitCommChanged = false;
+        $scope.sliderInitShareChanged = false;
+        $scope.sliderInitReportChanged = false;
+        $scope.sliderInitFactChanged = false;
 
         $scope.question = response.data;
 
@@ -455,6 +454,17 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
         $("#outputFamiliarity").css("color", "red");
         $("#outputInitialOpinion").val("Not Specified");
         $("#outputInitialOpinion").css("color", "red");
+
+        $("#outputInitLike").val("Not Specified");
+        $("#outputInitLike").css("color", "red");
+        $("#outputInitComment").val("Not Specified");
+        $("#outputInitComment").css("color", "red");
+        $("#outputInitShare").val("Not Specified");
+        $("#outputInitShare").css("color", "red");
+        $("#outputInitReport").val("Not Specified");
+        $("#outputInitReport").css("color", "red");
+        $("#outputInitFactcheck").val("Not Specified");
+        $("#outputInitFactcheck").css("color", "red");
 
         $scope.currentQIndex += 1;
         window.scrollTo(0, 0);
