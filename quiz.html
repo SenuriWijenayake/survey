@@ -96,7 +96,7 @@
 
         <div class="col-sm-12 question-confidence" style="display:none;margin-top: 25px;">
           <div>
-            <p class="question-labels">3) How <b>confident</b> are you of the <b>trustworthiness rating</b> provided? Move the slider to denote a value. Higher values denote higher confidence.</p>
+            <p class="question-labels">3) How <b>confident</b> are you in your assessment of the article's <b>trustworthiness</b>? Move the slider to denote a value. Higher values denote higher confidence.</p>
           </div>
           <div class="col-sm-12">
             <label class="col-sm-2" style="text-align:center;">
@@ -195,7 +195,7 @@
 
         <div class="col-sm-12 change-confidence" style="display:none;margin-top:25px;">
           <div>
-            <p class="question-labels">3) How <b>confident</b> are you of the new <b>trustworthiness rating</b> provided? Move the slider to denote a value. Higher values denote higher confidence.</p>
+            <p class="question-labels">3) How <b>confident</b> are you in your new assessment of the article's <b>trustworthiness</b>? Move the slider to denote a value. Higher values denote higher confidence.</p>
           </div>
 
           <div class="col-sm-12">
@@ -251,7 +251,19 @@
             </tr>
 
             <tr>
-              <td class="col-sm-3" style="padding:0px;"><label class="question-labels">Share this post to your wall</label></td>
+              <td class="col-sm-3" style="padding:0px;"><label class="question-labels">Search more about this story (fact check)</label></td>
+              <td class="col-sm-9">
+                <div class="slidecontainer" style="width:510px;">
+                  <input type="range" ng-model="newAnswer.factcheck" min="0" max="100" value="50" step="1" id="rangeFactcheck" oninput="outputFactcheck.value = rangeFactcheck.value" class="slider-fact">
+                </div>
+                <div class="outputcontainer">
+                  <output id="outputFactcheck" for="rangeFactcheck" class="special-output">Not Selected</output>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="col-sm-3" style="padding:0px;"><label class="question-labels">Share this post</label></td>
               <td class="col-sm-9">
                 <div class="slidecontainer" style="width:510px;">
                   <input type="range" ng-model="newAnswer.share" min="0" max="100" value="50" step="1" id="rangeShare" oninput="outputShare.value = rangeShare.value" class="slider-share">
@@ -273,6 +285,7 @@
                 </div>
               </td>
             </tr>
+
           </table>
 
         </div>
