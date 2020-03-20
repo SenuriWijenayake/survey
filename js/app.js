@@ -190,11 +190,7 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
   $(".slider-old-opinion").change(function() {
     $scope.initialOpinionChanged = true;
     $("#outputInitialOpinion").css("color", "green");
-    if($scope.myAnswer.initialOpinion != 0){
-      $(".question-confidence").css("display", "block");
-    } else {
-      $(".question-confidence").css("display", "none");
-    }
+    $(".question-confidence").css("display", "block");
   });
 
   $(".slider-one").change(function() {
@@ -331,11 +327,7 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
   $(".slider-new-opinion").change(function() {
     $scope.newOpinionChanged = true;
     $("#outputNewOpinion").css("color", "green");
-    if ($scope.newAnswer.newOpinion != 0){
-      $(".change-confidence").css("display", "block");
-    } else {
-      $(".change-confidence").css("display", "none");
-    }
+    $(".change-confidence").css("display", "block");
   });
 
   $(".slider-two").change(function() {
