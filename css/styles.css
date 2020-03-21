@@ -27,10 +27,12 @@
 
 .question-area{
   padding: 30px 15px;
+  padding-left: 0px;
 }
 
 .change-area{
   padding: 30px 15px;
+  padding-left: 0px;
   display: none;
 }
 
