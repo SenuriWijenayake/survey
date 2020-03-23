@@ -200,7 +200,7 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
 
   //Initialization
   $scope.myAnswer = {};
-  $scope.myAnswer.initialOpinion = 0;
+  $scope.myAnswer.initialOpinion = 50;
   $scope.myAnswer.initialConfidence = 50;
   $scope.myAnswer.initialFamiliarity = 50;
 
@@ -240,7 +240,7 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
       }).then(function(response) {
 
         $scope.newAnswer = {};
-        $scope.newAnswer.newOpinion = 0;
+        $scope.newAnswer.newOpinion = 50;
         $scope.newAnswer.newConfidence = 50;
         $scope.newAnswer.like = 50;
         $scope.newAnswer.comment = 50;
@@ -426,7 +426,7 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
         $("#next-button").css("display", "none");
 
         $scope.myAnswer = {};
-        $scope.myAnswer.initialOpinion = 0;
+        $scope.myAnswer.initialOpinion = 50;
         $scope.myAnswer.initialConfidence = 50;
         $scope.myAnswer.initialFamiliarity = 50;
 

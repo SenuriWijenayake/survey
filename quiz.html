@@ -75,7 +75,7 @@
           </div>
         </div> -->
 
-        <div class="col-sm-12 question-radio-opinion" style="display: none;margin-top: 25px;padding-left:3px; padding-right:3px;">
+        <!-- <div class="col-sm-12 question-radio-opinion" style="display: none;margin-top: 25px;padding-left:3px; padding-right:3px;">
           <label class="question-labels">2) How would you rate the <b>trustworthiness</b> of this post?</label>
           <div class="binary-opinion col-sm-12">
             <label class="col-sm-2" style="text-align:center;">
@@ -90,7 +90,29 @@
             </div>
             <label class="col-sm-1" style="padding-right: 0px;text-align:center;">
               Supportive (+)
-              News article is real.</label>
+              News article is real.
+            </label>
+          </div>
+        </div> -->
+
+        <!--Vas's approach-->
+        <div class="col-sm-12 question-radio-opinion" style="display: none;margin-top: 25px;padding-left:3px; padding-right:3px;">
+          <label class="question-labels">2) How would you rate the <b>trustworthiness</b> of this post?</label>
+          <div class="binary-opinion col-sm-12">
+            <label class="col-sm-2" style="text-align:center;">
+              Critical.<br/>
+              News article is fake.
+            </label>
+            <div class="slidecontainer col-sm-9" style="width:510px; padding:0px;margin-left:-1%;">
+              <input type="range" ng-model="myAnswer.initialOpinion" min="0" max="100" value="50" step="1" id="rangeInitialOpinion" oninput="outputInitialOpinion.value = rangeInitialOpinion.value" class="slider-old-opinion">
+            </div>
+            <label class="col-sm-1 col-lg-2" style="text-align:center;padding-right:0px;">
+              Supportive.<br/>
+              News article is real.
+            </label>
+          </div>
+          <div class="outputcontainer col-sm-12" style="width:100%;">
+            <output id="outputInitialOpinion" for="rangeInitialOpinion" class="not-selected-label">Not Selected</label>
           </div>
         </div>
 
@@ -245,7 +267,7 @@
         </div> -->
 
 
-        <div class="col-sm-12 change-radio-opinion" style="margin-top: 25px;display:none;padding-left:3px; padding-right:3px;">
+        <!-- <div class="col-sm-12 change-radio-opinion" style="margin-top: 25px;display:none;padding-left:3px; padding-right:3px;">
           <label class="question-labels">2) After reading the comments, how would you rate the <b>trustworthiness</b> of this post?</label>
           <div class="binary-opinion col-sm-12">
             <label class="col-sm-2" style="text-align:center;">
@@ -262,7 +284,29 @@
               Supportive (+)
               News article is real.</label>
           </div>
+        </div> -->
+
+          <!--Vas's approach-->
+        <div class="col-sm-12 change-radio-opinion" style="margin-top: 25px;display:none;padding-left:3px; padding-right:3px;">
+          <label class="question-labels">2) After reading the comments, how would you rate the <b>trustworthiness</b> of this post?</label>
+          <div class="binary-opinion col-sm-12">
+            <label class="col-sm-2" style="text-align:center;">
+              Critical.<br/>
+              News article is fake.
+            </label>
+            <div class="slidecontainer col-sm-9" style="width:510px; padding:0px;margin-left:-1%;">
+              <input type="range" ng-model="newAnswer.newOpinion" min="0" max="100" value="50" step="1" id="rangeNewOpinion" oninput="outputNewOpinion.value = rangeNewOpinion.value" class="slider-new-opinion">
+            </div>
+            <label class="col-sm-1 col-lg-2" style="padding-right: 0px;text-align:center;">
+              Supportive.<br/>
+              News article is real.
+            </label>
+          </div>
+          <div class="outputcontainer col-sm-12" style="width:100%;">
+            <output id="outputNewOpinion" for="rangeNewOpinion" class="not-selected-label">Not Selected</label>
+          </div>
         </div>
+
 
         <div class="col-sm-12 change-confidence" style="display:none;margin-top:25px;padding-left:3px; padding-right:3px;">
           <div>
