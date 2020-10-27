@@ -40,7 +40,7 @@
               the effect of user comments on the trustworthiness of Facebook posts. <br />
 
               To successfully complete the HIT, you will be required to complete <b>TWO</b> tasks. <br />
-              Please attempt this survey on a <b>laptop or a desktop computer.</b>  <br />
+              Please attempt this survey on a <b>laptop or a desktop computer.</b> <br />
 
               <h4><u>Tasks</u></h4>
 
@@ -53,7 +53,8 @@
               <br /><br /><b>**</b> You are expected to complete <b>BOTH</b> tasks in <b>one sitting</b>, which will take a maximum of <b>45 minutes</b>.
               <br /><b>**</b> Do <b>NOT refresh</b> the page, or use <b>forward and back</b> controls of the web browser during the experiment. If you do so, <b>your data will be lost and you will not receive any payment.</b>
 
-              <br /><h4><u>Other Information</u></h4>
+              <br />
+              <h4><u>Other Information</u></h4>
 
               No identifying information will be collected as part of our research data, and while participation will involve the recording of your worker ID, this will be removed from the data immediately after download. We will
               therefore not be able to identify your particular responses in our data.
@@ -167,41 +168,73 @@
               </tr>
               <tr class="row">
                 <td class="col-sm-6 right"></td>
-                <td class="col-sm-6"> <input type="radio" name="user.education" ng-model="user.education" value="some-college" class="edu-radio-button" id="some-college"> <label for="some-college" class="gender-label"> Some college, no degree
+                <td class="col-sm-6"> <input type="radio" name="user.education" ng-model="user.education" value="bachelors" class="edu-radio-button" id="bachelors"> <label for="bachelors" class="gender-label"> Bachelor's Degree
                   </label></td>
               </tr>
               <tr class="row">
                 <td class="col-sm-6 right"></td>
-                <td class="col-sm-6"> <input type="radio" name="user.education" ng-model="user.education" value="associate-degree" class="edu-radio-button" id="associate-degree"> <label for="associate-degree" class="gender-label"> Associate degree
+                <td class="col-sm-6"> <input type="radio" name="user.education" ng-model="user.education" value="masters" class="edu-radio-button" id="masters"> <label for="masters" class="gender-label"> Master's Degree
                   </label></td>
               </tr>
               <tr class="row">
                 <td class="col-sm-6 right"></td>
-                <td class="col-sm-6"> <input type="radio" name="user.education" ng-model="user.education" value="bachelors-degree" class="edu-radio-button" id="bachelors-degree"> <label for="bachelors-degree" class="gender-label"> Bachelor's degree
+                <td class="col-sm-6"> <input type="radio" name="user.education" ng-model="user.education" value="doctorate" class="edu-radio-button" id="doctorate"> <label for="doctorate" class="gender-label"> PhD or higher
                   </label></td>
               </tr>
               <tr class="row">
                 <td class="col-sm-6 right"></td>
-                <td class="col-sm-6"> <input type="radio" name="user.education" ng-model="user.education" value="masters-degree" class="edu-radio-button" id="masters-degree"> <label for="masters-degree" class="gender-label"> Graduate degree -
-                    Master's </label></td>
+                <td class="col-sm-6"> <input type="radio" name="user.education" ng-model="user.education" value="trade-school" class="edu-radio-button" id="trade-school"> <label for="trade-school" class="gender-label"> Trade School</label></td>
               </tr>
               <tr class="row">
                 <td class="col-sm-6 right"></td>
-                <td class="col-sm-6"> <input type="radio" name="user.education" ng-model="user.education" value="doctoral-degree" class="edu-radio-button" id="doctoral-degree"> <label for="doctoral-degree" class="gender-label"> Graduate degree -
-                    Doctorate </label></td>
+                <td class="col-sm-6"> <input type="radio" name="user.education" ng-model="user.education" value="prefer-not" class="edu-radio-button" id="prefer-not"> <label for="prefer-not" class="gender-label"> Prefer not to say
+                  </label></td>
               </tr>
+
+              <!--Ethnicity-->
+              <tr class="row">
+                <td class="col-sm-6 right padding-adjust-labels"> Ethnicity: <span style="color:red;">*</span> </td>
+                <td class="col-sm-6 padding-adjust-radio"> <input type="radio" name="user.ethnicity" ng-model="user.ethnicity" value="african-american" class="ethnicity-radio-button" id="african-american" required> <label for="african-american" class="gender-label">
+                    African-American </label></td>
+              </tr>
+
+              <tr class="row">
+                <td class="col-sm-6 right"></td>
+                <td class="col-sm-6"> <input type="radio" name="user.ethnicity" ng-model="user.ethnicity" value="asian" class="ethnicity-radio-button" id="asian" required> <label for="asian" class="gender-label"> Asian </label></td>
+              </tr>
+
+              <tr class="row">
+                <td class="col-sm-6 right"></td>
+                <td class="col-sm-6"> <input type="radio" name="user.ethnicity" ng-model="user.ethnicity" value="caucasian" class="ethnicity-radio-button" id="caucasian" required> <label for="caucasian" class="gender-label"> Caucasian </label></td>
+              </tr>
+
+              <tr class="row">
+                <td class="col-sm-6 right"></td>
+                <td class="col-sm-6"> <input type="radio" name="user.ethnicity" ng-model="user.ethnicity" value="latino-hispanic" class="ethnicity-radio-button" id="latino-hispanic" required> <label for="latino-hispanic" class="gender-label"> Latino or
+                    Hispanic
+                  </label></td>
+              </tr>
+
+              <tr class="row">
+                <td class="col-sm-6 right"></td>
+                <td class="col-sm-6"> <input type="radio" name="user.ethnicity" ng-model="user.ethnicity" value="native-american" class="ethnicity-radio-button" id="native-american" required> <label for="native-american" class="gender-label"> Native
+                    American
+                  </label></td>
+              </tr>
+
               <tr class="row">
                 <td class="col-sm-6 right"></td>
                 <td class="col-sm-6">
-                  <input type="radio" name="user.education" ng-model="user.education" value="education-specified" class="edu-radio-button" id="education-specified"> <label for="education-specified" class="specify-label"> Other : </label>
-                  <input type="text" id="education-text" ng-model="user.educationSpecified" class="edu-specify-text" disabled>
+                  <input id="ethinicity-not-specified" type="radio" name="user.ethnicity" ng-model="user.ethnicity" value="ethinicity-not-specified" class="ethnicity-radio-button"> <label for="ethinicity-not-specified" class="gender-label"> Prefer not to disclose </label>
                 </td>
               </tr>
 
-              <!--Social Media Use-->
               <tr class="row">
-                <td class="col-sm-6 right padding-adjust-labels"> Time Spent on Social Media per week (in hours): <span style="color:red;">*</span></td>
-                <td class="col-sm-6" style="padding-top: 10px;"> <input type="number" placeholder=" e.g. 10" ng-model="user.socialmedia" class="input-text" style="padding-left:5px;" required></td>
+                <td class="col-sm-6 right"></td>
+                <td class="col-sm-6">
+                  <input type="radio" id="ethnicity-specified" name="user.ethnicity" ng-model="user.ethnicity" value="ethnicity-specified" class="ethnicity-radio-button"> <label for="ethnicity-specified" class="specify-label"> Prefer to self-describe: </label>
+                  <input type="text" id="ethnicity-text" ng-model="user.ethnicitySpecified" class="specify-text" disabled>
+                </td>
               </tr>
 
             </table>

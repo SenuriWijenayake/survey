@@ -28,394 +28,69 @@
       </div>
     </div>
 
-    <div class="row">
-      <!-- step 1 -->
-      <div class="col-sm-5 image-area">
-        <div><label class="col-sm-12 step-label">Post : {{currentQIndex}} / 28</label></div>
-        <div class="screenshot-area">
-          <img src="./assets/posts/{{question.qSet}}/{{question.questionNumber + 2}}/one.jpg" class="screenshot-class" />
-        </div>
+    <div class="row question-area">
+      <div class="col-sm-12 question-description">
+        <h3>Question 1</h3>
+        <label class="qText">{{dummy.description}} <br /><br />
+          You want to have this decision reviewed. You are provided with the following review options. Select the review process that you prefer:<span style="color: red;">*</span> </label>
       </div>
 
-      <div class="col-sm-7 question-area">
-        <div><label class="col-sm-12 question-labels">Assume that this post appears on your Facebook news feed as shared by one of your distant friends.</label></div>
-
-        <div class="col-sm-12 question-familiarity" style="margin-top: 25px; padding-left:3px; padding-right:3px;">
-          <div>
-            <p class="question-labels">1) How <b>familiar</b> are you with this news article? Move the slider to denote a value. Higher values denote higher familiarity.</p>
-          </div>
-
-          <div class="col-sm-12">
-            <label class="col-sm-2" style="text-align:center;">
-              Low Familiarity
-            </label>
-            <div class="slidecontainer col-sm-9" style="width:510px;padding:0px;margin-left:-1%;">
-              <input type="range" ng-model="myAnswer.initialFamiliarity" min="0" max="100" value="50" step="1" id="rangeInputFamiliarity" oninput="outputFamiliarity.value = rangeInputFamiliarity.value" class="slider-familiarity">
-            </div>
-            <label class="col-sm-1" style="padding-right:0px;text-align:center;">
-              High Familiarity
-            </label>
-          </div>
-          <div class="outputcontainer col-sm-12" style="width:100%;">
-            <output id="outputFamiliarity" for="rangeInputFamiliarity">Not Selected</output>
-          </div>
-        </div>
-
-        <!-- <div class="col-sm-12 question-radio-opinion" style="display: none;margin-top: 25px;">
-          <label class="question-labels">2) If you were to comment on this post, would your comment be <b>mostly supportive</b> or <b>mostly critical</b> of the post?</label>
-          <div class="binary-opinion col-sm-12">
-            <label class="col-sm-2">Mostly Critical (-)</label>
-            <div class="slidecontainer-new col-sm-9" style="width:510px;">
-              <input type="range" ng-model="myAnswer.initialOpinion" min="-50" max="50" value="0" step="1" id="rangeInitialOpinion" oninput="outputInitialOpinion.value = rangeInitialOpinion.value * 2" class="slider-old-opinion">
-              <div class="outputcontainer">
-                <output id="outputInitialOpinion" for="rangeInitialOpinion" class="not-selected-label">Not Selected</label>
-              </div>
-            </div>
-            <label class="col-sm-2" style="padding-right: 0px;">Mostly Supportive (+)</label>
-          </div>
-        </div> -->
-
-        <!-- <div class="col-sm-12 question-radio-opinion" style="display: none;margin-top: 25px;padding-left:3px; padding-right:3px;">
-          <label class="question-labels">2) How would you rate the <b>trustworthiness</b> of this post?</label>
-          <div class="binary-opinion col-sm-12">
-            <label class="col-sm-2" style="text-align:center;">
-              Critical (-) <br/>
-              News article is fake.
-            </label>
-            <div class="slidecontainer-new col-sm-9" style="width:510px;">
-              <input type="range" ng-model="myAnswer.initialOpinion" min="-100" max="100" value="0" step="2" id="rangeInitialOpinion" oninput="outputInitialOpinion.value = rangeInitialOpinion.value" class="slider-old-opinion">
-              <div class="outputcontainer">
-                <output id="outputInitialOpinion" for="rangeInitialOpinion" class="not-selected-label">Not Selected</label>
-              </div>
-            </div>
-            <label class="col-sm-1" style="padding-right: 0px;text-align:center;">
-              Supportive (+)
-              News article is real.
-            </label>
-          </div>
-        </div> -->
-
-        <!--Vas's approach-->
-        <div class="col-sm-12 question-radio-opinion" style="display: none;margin-top: 25px;padding-left:3px; padding-right:3px;">
-          <label class="question-labels">2) How would you rate the <b>trustworthiness</b> of this post?</label>
-          <div class="binary-opinion col-sm-12">
-            <label class="col-sm-2" style="text-align:center;">
-              Critical.<br/>
-              News article is fake.
-            </label>
-            <div class="slidecontainer col-sm-9" style="width:510px; padding:0px;margin-left:-1%;">
-              <input type="range" ng-model="myAnswer.initialOpinion" min="0" max="100" value="50" step="1" id="rangeInitialOpinion" oninput="outputInitialOpinion.value = rangeInitialOpinion.value" class="slider-old-opinion">
-            </div>
-            <label class="col-sm-1 col-lg-2" style="text-align:center;padding-right:0px;">
-              Supportive.<br/>
-              News article is real.
-            </label>
-          </div>
-          <div class="outputcontainer col-sm-12" style="width:100%;">
-            <output id="outputInitialOpinion" for="rangeInitialOpinion" class="not-selected-label">Not Selected</label>
-          </div>
-        </div>
-
-        <div class="col-sm-12 question-confidence" style="display:none;margin-top: 25px;padding-left:3px; padding-right:3px;">
-          <div>
-            <p class="question-labels">3) How <b>confident</b> are you in your assessment of the article's <b>trustworthiness</b>? Move the slider to denote a value. Higher values denote higher confidence.</p>
-          </div>
-          <div class="col-sm-12">
-            <label class="col-sm-2" style="text-align:center;">
-              Low Confidence
-            </label>
-            <div class="slidecontainer col-sm-9" style="width:510px; padding:0px;margin-left:-1%;">
-              <input type="range" ng-model="myAnswer.initialConfidence" min="0" max="100" value="50" step="1" id="rangeInputOne" oninput="output.value = rangeInputOne.value" class="slider-one">
-            </div>
-            <label class="col-sm-1" style="text-align:center;padding-right:0px;">
-              High Confidence
-            </label>
-          </div>
-          <div class="outputcontainer col-sm-12" style="width:100%;">
-            <output id="output" for="rangeInputOne">Not Selected</output>
-          </div>
-        </div>
-
-        <!-- <div class="col-sm-12 question-opinion" style="margin-top: 25px;display:none;">
-          <label class="question-labels">4) If you are to comment on this post, what would be <b>your comment</b>? (You <b>MUST</b> provide a comment here.)</label>
-          <div class="opinion-box">
-            <textarea ng-model="myAnswer.initialTextOpinion" class="opinion-textarea"></textarea>
-          </div>
-        </div> -->
-
-        <div class="col-sm-12 initial-responses" style="display:none;margin-top:20px;padding-left:3px; padding-right:3px;">
-          <div>
-            <p class="question-labels">4) How likely are you to...</p>
-          </div>
-          <div>
-            <div class="col-sm-7" style="text-align:center;"><label style="text-align:center;">Extremely Unlikely</label></div>
-            <div class="col-sm-5" style="text-align:right;"><label style="text-align:center;">Extremely Likely</label></div>
-          </div>
-          <table class="response-table">
-              <td class="col-sm-3" style="padding:0px;"><label class="question-labels">React to this post (one of the following)</label> <br/> <img src="./assets/reactions.png" height="30" width="180"></td>
-              <td class="col-sm-9">
-                <div class="slidecontainer" style="width:510px;">
-                  <input type="range" ng-model="myAnswer.initialLike" min="0" max="100" value="50" step="1" id="rangeInitLike" oninput="outputInitLike.value = rangeInitLike.value" class="slider-like-one">
-                </div>
-                <div class="outputcontainer">
-                  <output id="outputInitLike" for="rangeInitLike" class="special-output">Not Selected</output>
-                </div>
-              </td>
-            </tr>
-
+      <div class="col-sm-12 review-options">
+        <div class="option-one">
+          <table>
             <tr>
-              <td class="col-sm-3" style="padding:0px;"><label class="question-labels">Comment on this post</label></td>
-              <td class="col-sm-9">
-                <div class="slidecontainer" style="width:510px;">
-                  <input type="range" ng-model="myAnswer.initialComment" min="0" max="100" value="50" step="1" id="rangeInitComment" oninput="outputInitComment.value = rangeInitComment.value" class="slider-comm-one">
-                </div>
-                <div class="outputcontainer">
-                  <output id="outputInitComment" for="rangeInitComment" class="special-output">Not Selected</output>
-                </div>
-              </td>
+              <td class="col-sm-3"><b>Reviewer:</b></td>
+              <td class="col-sm-9">{{dummy.optionOne.reviewer}}</td>
             </tr>
-
             <tr>
-              <td class="col-sm-3" style="padding:0px;"><label class="question-labels">Search more about this story (fact check)</label></td>
-              <td class="col-sm-9">
-                <div class="slidecontainer" style="width:510px;">
-                  <input type="range" ng-model="myAnswer.initialFactcheck" min="0" max="100" value="50" step="1" id="rangeInitFactcheck" oninput="outputInitFactcheck.value = rangeInitFactcheck.value" class="slider-fact-one">
-                </div>
-                <div class="outputcontainer">
-                  <output id="outputInitFactcheck" for="rangeInitFactcheck" class="special-output">Not Selected</output>
-                </div>
-              </td>
+              <td class="col-sm-3"><b>Style of Review:</b></td>
+              <td class="col-sm-9">{{dummy.optionOne.style}}</td>
             </tr>
-
             <tr>
-              <td class="col-sm-3" style="padding:0px;"><label class="question-labels">Share this post</label></td>
-              <td class="col-sm-9">
-                <div class="slidecontainer" style="width:510px;">
-                  <input type="range" ng-model="myAnswer.initialShare" min="0" max="100" value="50" step="1" id="rangeInitShare" oninput="outputInitShare.value = rangeInitShare.value" class="slider-share-one">
-                </div>
-                <div class="outputcontainer">
-                  <output id="outputInitShare" for="rangeInitShare" class="special-output">Not Selected</output>
-                </div>
-              </td>
+              <td class="col-sm-3"><b>Time for Review:</b></td>
+              <td class="col-sm-9">{{dummy.optionOne.time}}</td>
             </tr>
-
-            <tr>
-              <td class="col-sm-3" style="padding:0px;"><label class="question-labels">Report this post</label></td>
-              <td class="col-sm-9">
-                <div class="slidecontainer" style="width:510px;">
-                  <input type="range" ng-model="myAnswer.initialReport" min="0" max="100" value="50" step="1" id="rangeInitReport" oninput="outputInitReport.value = rangeInitReport.value" class="slider-report-one">
-                </div>
-                <div class="outputcontainer">
-                  <output id="outputInitReport" for="rangeInitReport" class="special-output">Not Selected</output>
-                </div>
-              </td>
-            </tr>
-
           </table>
         </div>
 
-        <div class="row">
-          <div class="col-sm-8 button" style="margin-left: -3%;">
-            <input id="submit-button" style="display:none;float:right;" class="submit-button" type="submit" ng-click="submitAnswer()" />
-          </div>
-          <div class="col-sm-4 index-loader" id="loader-one"></div>
-        </div>
-
-      </div>
-
-      <!-- step 2 -->
-      <div class="col-sm-5 image-area-two">
-        <div><label class="col-sm-12 step-label">Post : {{currentQIndex}} / 28</label></div>
-        <div class="screenshot-area">
-          <img src="./assets/posts/{{question.qSet}}/{{question.questionNumber + 2}}/two.jpg" class="screenshot-class" />
-        </div>
-      </div>
-
-      <div class="col-sm-7 change-area">
-        <div><label class="col-sm-12 question-labels">Now, carefully read the comments appearing on the post and answer the following questions.</label></div>
-
-        <div class="col-sm-12 manipulation-radio-opinion">
-          <label class="question-labels">1) Would you say the displayed user comments are mostly <b>supportive</b> or <b>critical</b> of the <b>post's trustworthiness?</b></label>
-          <div class="opinion-radio">
-            <div class="row">
-              <input style="margin-left: 40px;" id="manipulationSupportive" type="radio" name="newAnswer.manipulationRadioOpinion" ng-model="newAnswer.manipulationRadioOpinion" value="1" class="opinion-radio-button"> <label for="manipulationSupportive"
-                class="radio-labels">Most comments are <b>supportive</b> of the <b>post's trustworthiness.</b></label>
-            </div>
-            <div class="row">
-              <input style="margin-left: 40px;" id="manipulationCritical" type="radio" name="newAnswer.manipulationRadioOpinion" ng-model="newAnswer.manipulationRadioOpinion" value="0" class="opinion-radio-button"> <label for="manipulationCritical"
-                class="radio-labels">Most comments are <b>critical</b> of the <b>post's trustworthiness.</b></label>
-            </div>
-            <div class="row">
-              <input style="margin-left: 40px;" id="manipulationNeutral" type="radio" name="newAnswer.manipulationRadioOpinion" ng-model="newAnswer.manipulationRadioOpinion" value="-1" class="opinion-radio-button"> <label for="manipulationNeutral"
-                class="radio-labels">An <b>equal</b> number of both supportive and critical comments present.</label>
-            </div>
-          </div>
-        </div>
-
-        <!-- <div class="col-sm-12 change-radio-opinion" style="margin-top: 25px;display:none;">
-          <label class="question-labels">2) After reading the comments if you were to comment on this post, would your comment be <b>mostly supportive</b> or <b>mostly critical</b> of the post?</label>
-          <div class="binary-opinion col-sm-12">
-            <label class="col-sm-2">Mostly Critical (-)</label>
-            <div class="slidecontainer-new col-sm-10" style="width:510px;">
-              <input type="range" ng-model="newAnswer.newOpinion" min="-50" max="50" value="0" step="1" id="rangeNewOpinion" oninput="outputNewOpinion.value = rangeNewOpinion.value * 2" class="slider-new-opinion">
-              <div class="outputcontainer">
-                <output id="outputNewOpinion" for="rangeNewOpinion" class="not-selected-label">Not Selected</label>
-              </div>
-            </div>
-            <label class="col-sm-2" style="padding-right: 0px;">Mostly Supportive (+)</label>
-          </div>
-        </div> -->
-
-
-        <!-- <div class="col-sm-12 change-radio-opinion" style="margin-top: 25px;display:none;padding-left:3px; padding-right:3px;">
-          <label class="question-labels">2) After reading the comments, how would you rate the <b>trustworthiness</b> of this post?</label>
-          <div class="binary-opinion col-sm-12">
-            <label class="col-sm-2" style="text-align:center;">
-              Critical (-) <br/>
-              News article is fake.
-            </label>
-            <div class="slidecontainer-new col-sm-10" style="width:510px;">
-              <input type="range" ng-model="newAnswer.newOpinion" min="-100" max="100" value="0" step="2" id="rangeNewOpinion" oninput="outputNewOpinion.value = rangeNewOpinion.value" class="slider-new-opinion">
-              <div class="outputcontainer">
-                <output id="outputNewOpinion" for="rangeNewOpinion" class="not-selected-label">Not Selected</label>
-              </div>
-            </div>
-            <label class="col-sm-1" style="padding-right: 0px;text-align:center;">
-              Supportive (+)
-              News article is real.</label>
-          </div>
-        </div> -->
-
-          <!--Vas's approach-->
-        <div class="col-sm-12 change-radio-opinion" style="margin-top: 25px;display:none;padding-left:3px; padding-right:3px;">
-          <label class="question-labels">2) After reading the comments, how would you rate the <b>trustworthiness</b> of this post?</label>
-          <div class="binary-opinion col-sm-12">
-            <label class="col-sm-2" style="text-align:center;">
-              Critical.<br/>
-              News article is fake.
-            </label>
-            <div class="slidecontainer col-sm-9" style="width:510px; padding:0px;margin-left:-1%;">
-              <input type="range" ng-model="newAnswer.newOpinion" min="0" max="100" value="50" step="1" id="rangeNewOpinion" oninput="outputNewOpinion.value = rangeNewOpinion.value" class="slider-new-opinion">
-            </div>
-            <label class="col-sm-1 col-lg-2" style="padding-right: 0px;text-align:center;">
-              Supportive.<br/>
-              News article is real.
-            </label>
-          </div>
-          <div class="outputcontainer col-sm-12" style="width:100%;">
-            <output id="outputNewOpinion" for="rangeNewOpinion" class="not-selected-label">Not Selected</label>
-          </div>
-        </div>
-
-
-        <div class="col-sm-12 change-confidence" style="display:none;margin-top:25px;padding-left:3px; padding-right:3px;">
-          <div>
-            <p class="question-labels">3) How <b>confident</b> are you in your new assessment of the article's <b>trustworthiness</b>? Move the slider to denote a value. Higher values denote higher confidence.</p>
-          </div>
-
-          <div class="col-sm-12">
-            <label class="col-sm-2" style="text-align:center;">
-              Low Confidence
-            </label>
-            <div class="slidecontainer col-sm-9" style="width:510px;padding:0px;margin-left:-1%;">
-              <input type="range" ng-model="newAnswer.newConfidence" min="0" max="100" value="50" step="1" id="rangeInputTwo" oninput="outputTwo.value = rangeInputTwo.value" class="slider-two">
-            </div>
-            <label class="col-sm-1" style="text-align:center;padding-right:0px;">
-              High Confidence
-            </label>
-          </div>
-          <div class="outputcontainer col-sm-12" style="width:100%;">
-            <output id="outputTwo" for="rangeInputTwo">Not Selected</output>
-          </div>
-        </div>
-
-        <!-- <div class="col-sm-12 change-opinion" style="margin-top: 25px;display:none;">
-          <label class="question-labels">4) After reading the comments if you are to comment on this post, what would be <b>your comment</b>? (You <b>MUST</b> provide a comment here.)</label>
-          <div class="opinion-box">
-            <textarea ng-model="newAnswer.newTextOpinion" class="new-opinion-textarea"></textarea>
-          </div>
-        </div> -->
-
-        <div class="col-sm-12 responses" style="display:none;margin-top:20px;padding-left:3px; padding-right:3px;">
-          <div>
-            <p class="question-labels">4) After reading the comments, how likely are you to...</p>
-          </div>
-          <div>
-            <div class="col-sm-7" style="text-align:center;"><label style="text-align:center;">Extremely Unlikely</label></div>
-            <div class="col-sm-5" style="text-align:right;"><label style="text-align:center;">Extremely Likely</label></div>
-          </div>
-          <table class="response-table">
+        <div class="col-sm-5 option-two">
+          <table>
             <tr>
-              <td class="col-sm-3" style="padding:0px;"><label class="question-labels">React to this post (one of the following)</label> <br/> <img src="./assets/reactions.png" height="30" width="180"></td>
-              <td class="col-sm-9">
-                <div class="slidecontainer" style="width:510px;">
-                  <input type="range" ng-model="newAnswer.like" min="0" max="100" value="50" step="1" id="rangeLike" oninput="outputLike.value = rangeLike.value" class="slider-like">
-                </div>
-                <div class="outputcontainer">
-                  <output id="outputLike" for="rangeLike" class="special-output">Not Selected</output>
-                </div>
-              </td>
+              <td class="col-sm-3"><b>Reviewer:</b></td>
+              <td class="col-sm-9">{{dummy.optionTwo.reviewer}}</td>
             </tr>
-
             <tr>
-              <td class="col-sm-3" style="padding:0px;"><label class="question-labels">Comment on this post</label></td>
-              <td class="col-sm-9">
-                <div class="slidecontainer" style="width:510px;">
-                  <input type="range" ng-model="newAnswer.comment" min="0" max="100" value="50" step="1" id="rangeComment" oninput="outputComment.value = rangeComment.value" class="slider-comm">
-                </div>
-                <div class="outputcontainer">
-                  <output id="outputComment" for="rangeComment" class="special-output">Not Selected</output>
-                </div>
-              </td>
+              <td class="col-sm-3"><b>Style of Review:</b></td>
+              <td class="col-sm-9">{{dummy.optionTwo.style}}</td>
             </tr>
-
             <tr>
-              <td class="col-sm-3" style="padding:0px;"><label class="question-labels">Search more about this story (fact check)</label></td>
-              <td class="col-sm-9">
-                <div class="slidecontainer" style="width:510px;">
-                  <input type="range" ng-model="newAnswer.factcheck" min="0" max="100" value="50" step="1" id="rangeFactcheck" oninput="outputFactcheck.value = rangeFactcheck.value" class="slider-fact">
-                </div>
-                <div class="outputcontainer">
-                  <output id="outputFactcheck" for="rangeFactcheck" class="special-output">Not Selected</output>
-                </div>
-              </td>
+              <td class="col-sm-3"><b>Time for Review:</b></td>
+              <td class="col-sm-9">{{dummy.optionTwo.time}}</td>
             </tr>
-
-            <tr>
-              <td class="col-sm-3" style="padding:0px;"><label class="question-labels">Share this post</label></td>
-              <td class="col-sm-9">
-                <div class="slidecontainer" style="width:510px;">
-                  <input type="range" ng-model="newAnswer.share" min="0" max="100" value="50" step="1" id="rangeShare" oninput="outputShare.value = rangeShare.value" class="slider-share">
-                </div>
-                <div class="outputcontainer">
-                  <output id="outputShare" for="rangeShare" class="special-output">Not Selected</output>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td class="col-sm-3" style="padding:0px;"><label class="question-labels">Report this post</label></td>
-              <td class="col-sm-9">
-                <div class="slidecontainer" style="width:510px;">
-                  <input type="range" ng-model="newAnswer.report" min="0" max="100" value="50" step="1" id="rangeReport" oninput="outputReport.value = rangeReport.value" class="slider-report">
-                </div>
-                <div class="outputcontainer">
-                  <output id="outputReport" for="rangeReport" class="special-output">Not Selected</output>
-                </div>
-              </td>
-            </tr>
-
           </table>
         </div>
 
+        <div class="col-sm-12 option-box">
+          <table class="col-sm-12">
+            <td class="col-sm-6"> <input type="radio" id="one" name="options" value="one"> </td>
+            <td class="col-sm-6"> <input type="radio" id="two" name="options" value="two"> </td>
+          </table>
+        </div>
+
+        <div class="col-sm-12 text-explanation">
+          <label>Why did you choose this review option? <span style="color: red;">*</span></label>
+          <textarea class="text"></textarea>
+        </div>
+
         <div class="row">
-          <div class="col-sm-8 button">
-            <input id="next-button" style="display:none;float:right;" class="submit-button" type="submit" ng-click="update()" />
+          <div class="col-sm-7">
+            <button id="quiz-next" class="quiz-next" ng-click="nextq()">Next</button>
           </div>
-          <div class="col-sm-4 index-loader" id="loader-two"></div>
         </div>
 
       </div>
+    </div>
+  </div>
 </body>
 
 </html>

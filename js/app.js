@@ -1,27 +1,13 @@
 var app = angular.module('app', []);
-var api = 'https://blooming-woodland-81741.herokuapp.com';
-// var api = 'http://localhost:5000';
-
-app.controller('BigFiveController', function($scope, $http, $window) {
-
-  $http({
-    method: 'GET',
-    url: api + '/bigFiveQuestions'
-  }).then(function(response) {
-    $scope.questions = response.data;
-    document.getElementById('userId').value = $window.sessionStorage.getItem('userId');
-  }, function(error) {
-    console.log("Error occured when loading the big five questions");
-  });
-
-});
+// var api = 'https://blooming-woodland-81741.herokuapp.com';
+var api = 'http://localhost:5000';
 
 app.controller('HomeController', function($scope, $http, $window, $timeout) {
-  $scope.user = {};
-  $scope.user.questionSet = "1"; // This will be hardcoded based on the question set
 
+  $scope.user = {};
+
+  // To display the demographics form
   $scope.display = function() {
-    $window.sessionStorage.setItem('consentTime', Date.now());
     $(".landing-page").css("display", "none");
     $("#demographics").css("display", "block");
   };
@@ -48,17 +34,30 @@ app.controller('HomeController', function($scope, $http, $window, $timeout) {
     }
   });
 
+  $('.ethnicity-radio-button').change(function() {
+    if (this.id == "ethnicity-specified") {
+      $('#ethnicity-text').prop('disabled', false);
+      $('#ethnicity-text').prop('required', true);
+    } else {
+      $('#ethnicity-text').prop('required', false);
+      $('#ethnicity-text').val("");
+      $('#ethnicity-text').prop('disabled', true);
+    }
+  });
+
   $scope.indexNext = function(user) {
-    if (user.gender && user.age && user.age >= 18 && user.education && user.socialmedia && (user.gender == "gender-specified" ? user.genderSpecified : true) && (user.education == "education-specified" ? user.educationSpecified : true)) {
+    if (user.gender && user.age && user.age >= 18 && user.education && user.ethnicity && (user.gender == "gender-specified" ? user.genderSpecified : true) && (user.ethnicity == "ethnicity-specified" ? user.ethnicitySpecified : true)) {
+
+      console.log(user);
 
       $("#index-next").attr('disabled', true);
       $(".input-text").attr('disabled', true);
       $(".specify-text").attr('disabled', true);
-      $(".edu-specify-text").attr('disabled', true);
 
       $(".radio-button").attr('disabled', true);
       $(".gender-radio-button").attr('disabled', true);
       $(".edu-radio-button").attr('disabled', true);
+      $(".ethnicity-radio-button").attr('disabled', true);
 
       $("#index-next").css('background-color', 'grey');
 
@@ -81,7 +80,7 @@ app.controller('HomeController', function($scope, $http, $window, $timeout) {
     if (user.gender != "gender-specified") {
       delete user.genderSpecified;
     }
-    if (user.education != "education-specified") {
+    if (user.ethnicity != "ethnicity-specified") {
       delete user.educationSpecified;
     }
 
@@ -92,23 +91,35 @@ app.controller('HomeController', function($scope, $http, $window, $timeout) {
       type: JSON,
     }).then(function(response) {
       $window.sessionStorage.setItem('userId', response.data.id);
-      $window.sessionStorage.setItem('questionSet', user.questionSet);
       $window.sessionStorage.setItem('order', JSON.stringify(response.data.order));
       $window.location.href = './quiz.html';
     }, function(error) {
       console.log("Error occured when submitting user details");
     });
-
   };
-
 });
 
 app.controller('QuizController', function($scope, $http, $window, $timeout) {
 
+  $scope.dummy = {
+    "set": 1,
+    "qId": 1,
+    "description": "Imagine that you have applied for a home loan online from “Loans Online”. You have carefully filled out the online application form and uploaded all of the required documents. The “Loans Online” website uses an algorithmic system to provide an immediate yes/no decision on your application (‘the initial decision’). Your application for a loan is declined.",
+    "optionOne": {
+      "reviewer": "Human",
+      "style": "The algorithmic system that made the initial decision will 		be reviewed to ensure it is functioning as it should",
+      "time": "1 day"
+    },
+    "optionTwo": {
+      "reviewer": "Human",
+      "style": "A new decision will be made by the reviewer, that takes into account the initial decision and your views on the decision",
+      "time": "30 days"
+    }
+  };
+
   $scope.currentQIndex = 0;
 
   $scope.userId = $window.sessionStorage.getItem('userId');
-  $scope.questionSet = $window.sessionStorage.getItem('questionSet');
   $scope.order = JSON.parse($window.sessionStorage.getItem('order'));
 
   $scope.question = {};
