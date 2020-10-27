@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>Online Quiz</title>
+  <title>Online Survey</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -30,8 +30,8 @@
 
     <div class="row question-area">
       <div class="col-sm-12 question-description">
-        <h3>Question 1</h3>
-        <label class="qText">{{dummy.description}} <br /><br />
+        <h3>Question {{currentQIndex}}</h3>
+        <label class="qText">{{question.description}} <br /><br />
           You want to have this decision reviewed. You are provided with the following review options. Select the review process that you prefer:<span style="color: red;">*</span> </label>
       </div>
 
@@ -40,15 +40,15 @@
           <table>
             <tr>
               <td class="col-sm-3"><b>Reviewer:</b></td>
-              <td class="col-sm-9">{{dummy.optionOne.reviewer}}</td>
+              <td class="col-sm-9">{{question.optionOne.reviewer}}</td>
             </tr>
             <tr>
               <td class="col-sm-3"><b>Style of Review:</b></td>
-              <td class="col-sm-9">{{dummy.optionOne.style}}</td>
+              <td class="col-sm-9">{{question.optionOne.style}}</td>
             </tr>
             <tr>
               <td class="col-sm-3"><b>Time for Review:</b></td>
-              <td class="col-sm-9">{{dummy.optionOne.time}}</td>
+              <td class="col-sm-9">{{question.optionOne.time}}</td>
             </tr>
           </table>
         </div>
@@ -57,34 +57,34 @@
           <table>
             <tr>
               <td class="col-sm-3"><b>Reviewer:</b></td>
-              <td class="col-sm-9">{{dummy.optionTwo.reviewer}}</td>
+              <td class="col-sm-9">{{question.optionTwo.reviewer}}</td>
             </tr>
             <tr>
               <td class="col-sm-3"><b>Style of Review:</b></td>
-              <td class="col-sm-9">{{dummy.optionTwo.style}}</td>
+              <td class="col-sm-9">{{question.optionTwo.style}}</td>
             </tr>
             <tr>
               <td class="col-sm-3"><b>Time for Review:</b></td>
-              <td class="col-sm-9">{{dummy.optionTwo.time}}</td>
+              <td class="col-sm-9">{{question.optionTwo.time}}</td>
             </tr>
           </table>
         </div>
 
         <div class="col-sm-12 option-box">
           <table class="col-sm-12">
-            <td class="col-sm-6"> <input type="radio" id="one" name="options" value="one"> </td>
-            <td class="col-sm-6"> <input type="radio" id="two" name="options" value="two"> </td>
+            <td class="col-sm-6"> <input type="radio" id="one" name="options" value="one" class="radio-options" ng-model="answer.optionSelected"> </td>
+            <td class="col-sm-6"> <input type="radio" id="two" name="options" value="two" class="radio-options" ng-model="answer.optionSelected"> </td>
           </table>
         </div>
 
         <div class="col-sm-12 text-explanation">
           <label>Why did you choose this review option? <span style="color: red;">*</span></label>
-          <textarea class="text"></textarea>
+          <textarea class="text" ng-model="answer.explanation" id="explanation"></textarea>
         </div>
 
         <div class="row">
           <div class="col-sm-7">
-            <button id="quiz-next" class="quiz-next" ng-click="nextq()">Next</button>
+            <button id="quiz-next" class="quiz-next" ng-click="saveAnswer()">Next</button>
           </div>
         </div>
 
