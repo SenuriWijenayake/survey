@@ -105,25 +105,18 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
   $scope.userId = $window.sessionStorage.getItem('userId');
   $scope.order = JSON.parse($window.sessionStorage.getItem('order'));
 
-  $scope.question = {
-    "set": 1,
-    "qId": 1,
-    "description": "Imagine that you have applied for a home loan online from “Loans Online”. You have carefully filled out the online application form and uploaded all of the required documents. The “Loans Online” website uses an algorithmic system to provide an immediate yes/no decision on your application (‘the initial decision’). Your application for a loan is declined.",
-    "optionOne": {
-      "reviewer": "Human",
-      "style": "The algorithmic system that made the initial decision will 		be reviewed to ensure it is functioning as it should",
-      "time": "1 day"
-    },
-    "optionTwo": {
-      "reviewer": "Human",
-      "style": "A new decision will be made by the reviewer, that takes into account the initial decision and your views on the decision",
-      "time": "30 days"
-    }
-  };
+  $scope.question = {};
   $scope.answer = {};
 
   $scope.saveAnswer = function() {
     if ($scope.answer.optionSelected && ($.trim($('#explanation').val()))) {
+
+      //Disable the input
+      $("#quiz-next").attr('disabled', true);
+      $(".radio-options").attr('disabled', true);
+      $("#explanation").attr('disabled', true);
+      $("#quiz-loader").css('display', "block");
+
       var load = {
         userId: $scope.userId,
         question: $scope.question.qId,
@@ -157,8 +150,50 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
     }
   });
 
+  //Setting the question one
+  $http({
+    method: 'POST',
+    url: api + '/question',
+    data: {
+      qId: $scope.order[$scope.currentQIndex]
+    },
+    type: JSON,
+  }).then(function(response) {
+    $scope.currentQIndex += 1;
+    $scope.question = response.data;
+
+  }, function(error) {
+    console.log("Error occured when getting the first question");
+  });
+
   $scope.next = function(){
-      console.log("At next question");
+    if ($scope.currentQIndex != 6) {
+      //Move to next question`
+      $http({
+        method: 'POST',
+        url: api + '/question',
+        data: {
+          qId: $scope.order[$scope.currentQIndex]
+        },
+        type: JSON,
+      }).then(function(response) {
+        $("#quiz-loader").css('display', "none");
+        $scope.currentQIndex += 1;
+        $scope.question = response.data;
+        $scope.answer = {};
+        //Enable the input
+        $("#quiz-next").attr('disabled', false);
+        $(".radio-options").attr('disabled', false);
+        $("#explanation").attr('disabled', false);
+
+      }, function(error) {
+        console.log("Error occured when getting the question");
+      })
+
+    } else {
+      $("#quiz-loader").css('display', "none");
+      console.log("Step Two");
+    }
   }
 
 
@@ -231,22 +266,7 @@ app.controller('QuizController', function($scope, $http, $window, $timeout) {
     }
   };
 
-  //Setting the question one
-  // $http({
-  //   method: 'POST',
-  //   url: api + '/question',
-  //   data: {
-  //     set: $scope.questionSet,
-  //     id: $scope.order[$scope.currentQIndex]
-  //   },
-  //   type: JSON,
-  // }).then(function(response) {
-  //   $scope.currentQIndex += 1;
-  //   $scope.question = response.data;
-  //
-  // }, function(error) {
-  //   console.log("Error occured when getting the first question");
-  // });
+
 
   //Initialization
   // $scope.myAnswer = {};

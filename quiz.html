@@ -82,9 +82,12 @@
           <textarea class="text" ng-model="answer.explanation" id="explanation"></textarea>
         </div>
 
-        <div class="row">
+        <div class="row" id="submit-section">
           <div class="col-sm-7">
             <button id="quiz-next" class="quiz-next" ng-click="saveAnswer()">Next</button>
+          </div>
+          <div class="col-sm-4">
+            <div id="quiz-loader" class="quiz-loader"></div>
           </div>
         </div>
 
